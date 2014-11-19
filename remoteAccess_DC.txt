@@ -1,0 +1,3 @@
+for windows machine:
+go to remote desktop conn and give:
+ts.engr.scu.edu
