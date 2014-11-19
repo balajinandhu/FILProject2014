@@ -1,0 +1,13 @@
+git status : to know about the status of files
+git add <filename> : to update changes in <filename> 
+git commit -m "change description" : to take changes in desktop version to staging area
+git log : to check the previous commit versions
+git push -u origin master : to save changes in staging area to online version
+touch testfile.txt : to create a new file in directory
+
+3 steps to commit changes to online :
+git add . : to start tracking new files in current directory(u can specify other file names to add to current commit folder)
+git commit -m "" :
+git push
+
+git pull origin master : Pull requests let you tell others about changes you've pushed to a repository on GitHub.
