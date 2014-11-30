@@ -24,8 +24,6 @@ public class UserRecord implements Serializable {
 	private String role;
 
 	@Column
-	private String Tags;
-
 	private int team_ID;
 
 	@Column

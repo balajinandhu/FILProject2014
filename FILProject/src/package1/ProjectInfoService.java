@@ -12,19 +12,27 @@ public class ProjectInfoService {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Object> readAll() {
+	public List<ProjectUser> readProjectbyUser(String projectName) {
 		//UserRecord rec = manager.find(UserRecord.class, 29);
 		//System.out.print(rec);
-		/*TypedQuery<ProjectInfo>*/ Query query = manager.createQuery("SELECT p.project_description, u.user_name FROM UserRecord u JOIN "
-				+ "ProjectInfo p WHERE u.team_ID = p.team_ID");
+		List<ProjectUser> result = manager.createQuery("SELECT NEW package1.ProjectUser("
+				+ "p.project_description, p.status, u.user_name)"
+				+ " FROM UserRecord u JOIN "
+				+ "ProjectInfo p WHERE u.team_ID = p.team_ID"
+				+ " AND u.team_ID=(SELECT e.team_ID from ProjectInfo e"
+				+ " WHERE e.project_name = ?1)", ProjectUser.class)
+				.setParameter(1, projectName)
+				.getResultList();
 		
-		List<Object> result = query.getResultList();
-		System.out.print(query.getResultList().toString());
-		for (int i = 0; i < result.size(); i++) {
-			System.out.println(result.get(i));
-		}
-	 
 		return result; 
 	}
 
+	
+	public List<TeamInfo> readAll() {
+		TypedQuery<TeamInfo> query = manager.createQuery("SELECT e FROM TeamInfo e", TeamInfo.class);
+		List<TeamInfo> result = query.getResultList();
+		return result; 
+	}
+
+	
 }

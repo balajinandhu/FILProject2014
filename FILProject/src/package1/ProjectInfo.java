@@ -1,6 +1,7 @@
 package package1;
 import java.sql.Date;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -8,6 +9,62 @@ import javax.persistence.*;
 import org.eclipse.persistence.sessions.Record;
 
 import java.io.*;
+
+
+class ProjectUser {
+	private String project_description;
+	private String status;
+	private String user_name;
+	
+	public ProjectUser(String project_description, String status, String user_name) {
+		this.project_description = project_description;
+		this.status = status;
+		this.user_name = user_name;
+	}
+	
+	String getProjectDescription() { return project_description; }
+	String getStatus() { return status; }
+	String getUserName() { return user_name; }
+	@Override
+	public String toString() {
+		return "Project_desc =" + project_description + ", " + " status =" + status + "," +
+				" user_name =" + user_name;
+	}
+	
+	public String getColumnName(int i) throws Exception {
+		String colName = null;
+		
+		if(i == 0)
+			colName = "Project Description";
+		else if(i== 1)
+			colName = "Status";
+		else if(i ==2)
+			colName = "User Name";
+		else
+			throw new Exception("Access to invalid column number in courselist table");
+
+		return colName;
+	}
+	public Object getColumnData(int i) throws Exception {
+			
+			if (i == 0) 
+				return project_description;
+			else if (i ==1)
+				return status;
+			else if (i == 2) {
+				/*Iterator itr = getUserRecord().iterator();
+		        while(itr.hasNext())
+		        {
+		            System.out.println(itr.next());
+		        }*/
+				return user_name;
+			}
+			
+			else
+				throw new Exception("Error: invalid column index in courselist table"); 
+		}
+}
+
 @SuppressWarnings("serial")
 @Entity(name = "ProjectInfo")
 public class ProjectInfo implements Serializable {
@@ -49,8 +106,8 @@ public class ProjectInfo implements Serializable {
 
 	@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(name="ProjectUser_map", joinColumns={
-			@JoinColumn(name="project_ID", referencedColumnName="team_ID", nullable=false, updatable=false)},
-			inverseJoinColumns={ @JoinColumn(name="user_ID", referencedColumnName="team_ID", nullable=false, updatable=false)})
+			@JoinColumn(name="project_ID", nullable=false, updatable=false)},
+			inverseJoinColumns={ @JoinColumn(name="user_ID", nullable=false, updatable=false)})
 	private Set<UserRecord> userrecord;
 	public Set<UserRecord> getUserRecord() {
 		return userrecord;
@@ -129,7 +186,7 @@ public class ProjectInfo implements Serializable {
 
 	// return the data in column i
 	public Object getColumnData(int i) throws Exception {
-		if (i == 0)
+	/*	if (i == 0)
 			return getProject_ID();
 		else if (i == 1) // 1
 			return getTeam_ID();
@@ -153,6 +210,21 @@ public class ProjectInfo implements Serializable {
 			return getEndDate();
 		else if(i == 8)
 			return getEstimated_budget();*/
+		
+		
+		if (i == 0) 
+			return getProject_description();
+		else if (i ==1)
+			return getStatus();
+		else if (i == 2) {
+			/*Iterator itr = getUserRecord().iterator();
+	        while(itr.hasNext())
+	        {
+	            System.out.println(itr.next());
+	        }*/
+			return getUserRecord();
+		}
+		
 		else
 			throw new Exception("Error: invalid column index in courselist table"); 
 	}
@@ -160,7 +232,7 @@ public class ProjectInfo implements Serializable {
 	// return the name of column i
 	public String getColumnName(int i) throws Exception {
 		String colName = null;
-		if (i == 0) // 0 
+	/*	if (i == 0) // 0 
 			colName = "Project_ID";
 		else if (i == 1) // 1
 			colName = "Team_ID";
@@ -177,7 +249,14 @@ public class ProjectInfo implements Serializable {
 		else if (i == 7)
 			colName = "end_date";
 		else if(i == 8)
-			colName = "Estimated_budget";
+			colName = "Estimated_budget"; */
+		
+		if(i == 0)
+			colName = "Project Description";
+		else if(i== 1)
+			colName = "Status";
+		else if(i ==2)
+			colName = "User Name";
 		else
 			throw new Exception("Access to invalid column number in courselist table");
 

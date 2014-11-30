@@ -1,7 +1,10 @@
 package package1;
-
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.List;
 
+import javax.swing.JButton;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
@@ -10,44 +13,217 @@ import javax.swing.JTable;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 /**
  *
- * @author karnati_sruti
+ * @author vkarnati
  */
 public class AdminHomePageGUI extends javax.swing.JFrame {
 
+    private javax.swing.JPanel teamSearchPanel;
+    private javax.swing.JPanel projectSearchPanel;
+    private javax.swing.JTextField txtParticipantName;
+    private javax.swing.JLabel lblParticipantName;
+    private javax.swing.JTextField txtProjectName;
+    private javax.swing.JLabel lblProjectName;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable4;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JButton btnSearch;
+    private javax.swing.JButton btn1Search;
+    private javax.swing.JButton btnViewBudget;
+    private javax.swing.JPanel AdminTeamPanel;
+   
+    
     /**
-     * Creates new form Admin
+     * Creates new form AdminHomeGUI
      */
-	
-	private JTable jtable1; // the table displayed on the GUI
-	private TeamInfoController teamInfoController;
-	
+    private JTable jtable3; // the table displayed on the GUI
+    private ProjectInfoController projectTableController;
+    private TeamInfoController teamInfoController;
+    private TaskInfoController taskInfoController;
+    private TempAddMemberController tempAddMemberController;
+    
     public AdminHomePageGUI() {
-    	
         initComponents();
+        projectTableController = new ProjectInfoController(this);
         teamInfoController = new TeamInfoController(this);
-        
+        taskInfoController = new TaskInfoController(this);
+        tempAddMemberController = new TempAddMemberController(this);
         addJTable();
+        
+       
+        btnViewBudget = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        btnSearch = new javax.swing.JButton();
+        teamSearchPanel = new javax.swing.JPanel();
+        lblParticipantName = new javax.swing.JLabel();
+        txtParticipantName = new javax.swing.JTextField();
+       // jScrollPane1 = new javax.swing.JScrollPane();
+    //    jTable1 = new javax.swing.JTable();
+     //   jScrollPane1.setViewportView(jTable1);
+        lblParticipantName.setText("Participant Name");
+        javax.swing.GroupLayout teamSearchPanelLayout = new javax.swing.GroupLayout(teamSearchPanel);
+        teamSearchPanel.setLayout(teamSearchPanelLayout);
+        teamSearchPanelLayout.setHorizontalGroup(
+            teamSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 593, Short.MAX_VALUE)
+        );
+        teamSearchPanelLayout.setVerticalGroup(
+            teamSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 172, Short.MAX_VALUE)
+        );
+
+        btnSearch.setText("Search");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(134, 134, 134)
+                        .addComponent(lblParticipantName)
+                        .addGap(94, 94, 94)
+                        .addComponent(txtParticipantName, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(57, 57, 57)
+                        .addComponent(btnSearch))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(teamSearchPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(237, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblParticipantName)
+                    .addComponent(txtParticipantName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearch))
+                .addGap(44, 44, 44)
+                .addComponent(teamSearchPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(123, Short.MAX_VALUE))
+        );
+
+        cardPanel.add(jPanel3, "card1");
+
+       
+        jPanel5 = new javax.swing.JPanel();
+        btn1Search = new javax.swing.JButton();
+        projectSearchPanel = new javax.swing.JPanel();
+        lblProjectName = new javax.swing.JLabel();
+        txtProjectName = new javax.swing.JTextField();
+    //    jScrollPane2 = new javax.swing.JScrollPane();
+     //   jTable2 = new javax.swing.JTable();
+        //jScrollPane2.setViewportView(jTable2);
+        lblProjectName.setText("Project Name");
+        
+        btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
+        
+        btn1Search.setText("Search");
+        btn1Search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn1SearchActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout projectSearchPanelLayout = new javax.swing.GroupLayout(projectSearchPanel);
+        projectSearchPanel.setLayout(projectSearchPanelLayout);
+        projectSearchPanelLayout.setHorizontalGroup(
+            projectSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 598, Short.MAX_VALUE)
+        );
+        projectSearchPanelLayout.setVerticalGroup(
+            projectSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 148, Short.MAX_VALUE)
+        );
+
+        btnViewBudget.setText("View Budget");
+        btnViewBudget.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewBudgetActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(169, 169, 169)
+                .addComponent(lblProjectName)
+                .addGap(97, 97, 97)
+                .addComponent(txtProjectName, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(56, 56, 56)
+                .addComponent(btn1Search)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addComponent(projectSearchPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addComponent(btnViewBudget)
+                .addGap(0, 39, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblProjectName)
+                    .addComponent(txtProjectName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn1Search))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(projectSearchPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(btnViewBudget)))
+                .addContainerGap(127, Short.MAX_VALUE))
+        );
+
+        cardPanel.add(jPanel5, "card2");
+            
+        cardPanel.setVisible(false);
     }
+
     
     public void addJTable() {
-		// add the data and column names to a JTable
-		//jtable1  = new JTable(courseListTableController.getData(), courseListTableController.getColumnNames());
+    	// add the data and column names to a JTable
+    	//jtable1  = new JTable(courseListTableController.getData(), courseListTableController.getColumnNames());
+       
+        
+               
+    	// add a ListSelectionListener to the table
+    //	jtable3.getSelectionModel().addListSelectionListener(projectTableController);
+    	
+    	// add the table to a scrollpane
+    	jtable3 = new JTable(teamInfoController.getTableModel());
+        JScrollPane scrollpane = new JScrollPane(jtable3);
+    	// create a window
+    	teamTablePanel.setLayout(new BorderLayout());
+    	teamTablePanel.add(scrollpane, BorderLayout.CENTER);
+    	
+    	
+    	jTable4 = new JTable(tempAddMemberController.getTableModel());
+        jScrollPane4 = new JScrollPane(jTable4);
+    	// create a window
+    	addMemberPanel.setLayout(new BorderLayout());
+    	addMemberPanel.add(jScrollPane4, BorderLayout.CENTER);
+    	
 
-		jtable1 = new JTable(teamInfoController.getTableModel());
-
-		// add a ListSelectionListener to the table
-		//jtable1.getSelectionModel().addListSelectionListener(projectTableController);
-		// add the table to a scrollpane
-		JScrollPane scrollpane = new JScrollPane(jtable1);
-		// create a window
-		TeamTable.setLayout(new BorderLayout());
-		TeamTable.add(scrollpane, BorderLayout.CENTER);
-
-
-	}
-
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -57,303 +233,301 @@ public class AdminHomePageGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
+    	 AdminTeamPanel = new javax.swing.JPanel();
         buttonGroup1 = new javax.swing.ButtonGroup();
-        topPanel = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jTabbedPane = new javax.swing.JTabbedPane();
+        searchPane = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        teamSearchButton = new javax.swing.JRadioButton();
+        projectSearchButton = new javax.swing.JRadioButton();
+        cardPanel = new javax.swing.JPanel();
+        teamPane = new javax.swing.JPanel();
+        lblExistingTeams = new javax.swing.JLabel();
+        teamTablePanel = new javax.swing.JPanel();
         lblWelcome = new javax.swing.JLabel();
         btnLogout = new javax.swing.JButton();
-        jTabbedPane2 = new javax.swing.JTabbedPane();
-        SearchPanel = new javax.swing.JPanel();
-        lblSearch = new javax.swing.JLabel();
-        rbtnTeamMember = new javax.swing.JRadioButton();
-        rtbnProject = new javax.swing.JRadioButton();
-        btnSearch = new javax.swing.JButton();
-        teamSearchPanel = new javax.swing.JPanel();
-        lblParticipantName = new javax.swing.JLabel();
-        txtParticipantName = new javax.swing.JTextField();
-        projectSearchPanel = new javax.swing.JPanel();
-        lblProjectName = new javax.swing.JLabel();
-        txtProjectName = new javax.swing.JTextField();
-        TeamPanel = new javax.swing.JPanel();
-        TeamTable = new javax.swing.JPanel();
-        lblExistingTeams = new javax.swing.JLabel();
-        MemberPanel = new javax.swing.JPanel();
+        btnAdminAddTeam = new javax.swing.JButton();
+        memberPane = new javax.swing.JPanel();
+        addMemberPanel = new javax.swing.JPanel();
+        btnAdminAddMember = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jTabbedPane.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jTabbedPane.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
+        jTabbedPane.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTabbedPaneMouseClicked(evt);
+            }
+        });
+
+        searchPane.setLayout(new java.awt.CardLayout());
+
+        buttonGroup1.add(teamSearchButton);
+        teamSearchButton.setText("Search by Team member");
+        teamSearchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                teamSearchButtonActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(projectSearchButton);
+        projectSearchButton.setText("Search by Project");
+        projectSearchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                projectSearchButtonActionPerformed(evt);
+            }
+        });
+
+
+        cardPanel.setLayout(new java.awt.CardLayout());
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 190, Short.MAX_VALUE)
+            .addComponent(cardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(189, 189, 189)
+                        .addComponent(teamSearchButton)
+                        .addGap(97, 97, 97)
+                        .addComponent(projectSearchButton)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 76, Short.MAX_VALUE)
-        );
-
-        lblWelcome.setText("Hi, welcome ");
-
-        btnLogout.setText("Logout");
-        btnLogout.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLogoutActionPerformed(evt);
-            }
-        });
-
-        jTabbedPane2.setBorder(javax.swing.BorderFactory.createCompoundBorder());
-        jTabbedPane2.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
-
-        SearchPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        lblSearch.setText("Search");
-
-        buttonGroup1.add(rbtnTeamMember);
-        rbtnTeamMember.setText("By Team Member");
-        rbtnTeamMember.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbtnTeamMemberActionPerformed(evt);
-            }
-        });
-
-        buttonGroup1.add(rtbnProject);
-        rtbnProject.setText("By Project");
-        rtbnProject.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rtbnProjectActionPerformed(evt);
-            }
-        });
-
-        btnSearch.setText("Search");
-        btnSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearchActionPerformed(evt);
-            }
-        });
-
-        lblParticipantName.setText("Participant Name");
-
-        txtParticipantName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtParticipantNameActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout teamSearchPanelLayout = new javax.swing.GroupLayout(teamSearchPanel);
-        teamSearchPanel.setLayout(teamSearchPanelLayout);
-        teamSearchPanelLayout.setHorizontalGroup(
-            teamSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(teamSearchPanelLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(lblParticipantName)
-                .addGap(57, 57, 57)
-                .addComponent(txtParticipantName, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(105, Short.MAX_VALUE))
-        );
-        teamSearchPanelLayout.setVerticalGroup(
-            teamSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(teamSearchPanelLayout.createSequentialGroup()
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(teamSearchButton)
+                    .addComponent(projectSearchButton))
                 .addGap(18, 18, 18)
-                .addGroup(teamSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblParticipantName)
-                    .addComponent(txtParticipantName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(210, Short.MAX_VALUE))
-        );
-
-        lblProjectName.setText("Project Name");
-
-        javax.swing.GroupLayout projectSearchPanelLayout = new javax.swing.GroupLayout(projectSearchPanel);
-        projectSearchPanel.setLayout(projectSearchPanelLayout);
-        projectSearchPanelLayout.setHorizontalGroup(
-            projectSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(projectSearchPanelLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(lblProjectName)
-                .addGap(79, 79, 79)
-                .addComponent(txtProjectName, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(82, Short.MAX_VALUE))
-        );
-        projectSearchPanelLayout.setVerticalGroup(
-            projectSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(projectSearchPanelLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(projectSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblProjectName)
-                    .addComponent(txtProjectName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout SearchPanelLayout = new javax.swing.GroupLayout(SearchPanel);
-        SearchPanel.setLayout(SearchPanelLayout);
-        SearchPanelLayout.setHorizontalGroup(
-            SearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(SearchPanelLayout.createSequentialGroup()
-                .addGroup(SearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(SearchPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblSearch))
-                    .addGroup(SearchPanelLayout.createSequentialGroup()
-                        .addGroup(SearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(SearchPanelLayout.createSequentialGroup()
-                                .addGap(76, 76, 76)
-                                .addComponent(rbtnTeamMember)
-                                .addGap(59, 59, 59)
-                                .addComponent(rtbnProject))
-                            .addGroup(SearchPanelLayout.createSequentialGroup()
-                                .addGap(31, 31, 31)
-                                .addComponent(teamSearchPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(44, 44, 44)
-                        .addGroup(SearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnSearch)
-                            .addComponent(projectSearchPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(85, Short.MAX_VALUE))
-        );
-        SearchPanelLayout.setVerticalGroup(
-            SearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(SearchPanelLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(lblSearch)
-                .addGap(18, 18, 18)
-                .addGroup(SearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(SearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(rbtnTeamMember)
-                        .addComponent(rtbnProject))
-                    .addComponent(btnSearch))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(SearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(teamSearchPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(projectSearchPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(cardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE))
         );
 
-        jTabbedPane2.addTab("Search", SearchPanel);
+        searchPane.add(jPanel2, "card2");
 
-        TeamPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        javax.swing.GroupLayout TeamTableLayout = new javax.swing.GroupLayout(TeamTable);
-        TeamTable.setLayout(TeamTableLayout);
-        TeamTableLayout.setHorizontalGroup(
-            TeamTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 725, Short.MAX_VALUE)
-        );
-        TeamTableLayout.setVerticalGroup(
-            TeamTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 157, Short.MAX_VALUE)
-        );
+        jTabbedPane.addTab("Search", searchPane);
 
         lblExistingTeams.setText("Existing Teams");
 
-        javax.swing.GroupLayout TeamPanelLayout = new javax.swing.GroupLayout(TeamPanel);
-        TeamPanel.setLayout(TeamPanelLayout);
-        TeamPanelLayout.setHorizontalGroup(
-            TeamPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TeamPanelLayout.createSequentialGroup()
-                .addGroup(TeamPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(TeamPanelLayout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(TeamTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(TeamPanelLayout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addComponent(lblExistingTeams)))
-                .addContainerGap(91, Short.MAX_VALUE))
+        javax.swing.GroupLayout teamTablePanelLayout = new javax.swing.GroupLayout(teamTablePanel);
+        teamTablePanel.setLayout(teamTablePanelLayout);
+        teamTablePanelLayout.setHorizontalGroup(
+            teamTablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 353, Short.MAX_VALUE)
         );
-        TeamPanelLayout.setVerticalGroup(
-            TeamPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TeamPanelLayout.createSequentialGroup()
-                .addContainerGap(122, Short.MAX_VALUE)
-                .addComponent(lblExistingTeams)
+        teamTablePanelLayout.setVerticalGroup(
+            teamTablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 159, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout AdminTeamPanelLayout = new javax.swing.GroupLayout(AdminTeamPanel);
+        AdminTeamPanel.setLayout(AdminTeamPanelLayout);
+        AdminTeamPanelLayout.setHorizontalGroup(
+            AdminTeamPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 568, Short.MAX_VALUE)
+        );
+        AdminTeamPanelLayout.setVerticalGroup(
+            AdminTeamPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 118, Short.MAX_VALUE)
+        );
+
+        btnAdminAddTeam.setText("Add Team");
+        btnAdminAddTeam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdminAddTeamActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout teamPaneLayout = new javax.swing.GroupLayout(teamPane);
+        teamPane.setLayout(teamPaneLayout);
+        teamPaneLayout.setHorizontalGroup(
+            teamPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(teamPaneLayout.createSequentialGroup()
+                .addGroup(teamPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(teamPaneLayout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(AdminTeamPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(49, 49, 49)
+                        .addComponent(btnAdminAddTeam))
+                    .addGroup(teamPaneLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblExistingTeams))
+                    .addGroup(teamPaneLayout.createSequentialGroup()
+                        .addGap(126, 126, 126)
+                        .addComponent(teamTablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(120, Short.MAX_VALUE))
+        );
+        teamPaneLayout.setVerticalGroup(
+            teamPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(teamPaneLayout.createSequentialGroup()
+                .addGroup(teamPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(teamPaneLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(AdminTeamPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(teamPaneLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(btnAdminAddTeam)))
                 .addGap(18, 18, 18)
-                .addComponent(TeamTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
+                .addComponent(lblExistingTeams)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(teamTablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(140, Short.MAX_VALUE))
         );
 
-        jTabbedPane2.addTab("Team", TeamPanel);
+        jTabbedPane.addTab("Team", teamPane);
 
-        MemberPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        javax.swing.GroupLayout MemberPanelLayout = new javax.swing.GroupLayout(MemberPanel);
-        MemberPanel.setLayout(MemberPanelLayout);
-        MemberPanelLayout.setHorizontalGroup(
-            MemberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 855, Short.MAX_VALUE)
+        javax.swing.GroupLayout addMemberPanelLayout = new javax.swing.GroupLayout(addMemberPanel);
+        addMemberPanel.setLayout(addMemberPanelLayout);
+        addMemberPanelLayout.setHorizontalGroup(
+            addMemberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 615, Short.MAX_VALUE)
         );
-        MemberPanelLayout.setVerticalGroup(
-            MemberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 330, Short.MAX_VALUE)
+        addMemberPanelLayout.setVerticalGroup(
+            addMemberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 183, Short.MAX_VALUE)
         );
 
-        jTabbedPane2.addTab("Member", MemberPanel);
+        btnAdminAddMember.setText("Add Member");
+        btnAdminAddMember.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdminAddMemberActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout topPanelLayout = new javax.swing.GroupLayout(topPanel);
-        topPanel.setLayout(topPanelLayout);
-        topPanelLayout.setHorizontalGroup(
-            topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(topPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(topPanelLayout.createSequentialGroup()
-                        .addComponent(jTabbedPane2)
-                        .addContainerGap())
-                    .addGroup(topPanelLayout.createSequentialGroup()
-                        .addComponent(lblWelcome)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnLogout)
-                        .addGap(46, 46, 46))
-                    .addGroup(topPanelLayout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        javax.swing.GroupLayout memberPaneLayout = new javax.swing.GroupLayout(memberPane);
+        memberPane.setLayout(memberPaneLayout);
+        memberPaneLayout.setHorizontalGroup(
+            memberPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(memberPaneLayout.createSequentialGroup()
+                .addGap(65, 65, 65)
+                .addComponent(addMemberPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(160, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, memberPaneLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAdminAddMember)
+                .addGap(130, 130, 130))
         );
-        topPanelLayout.setVerticalGroup(
-            topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(topPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        memberPaneLayout.setVerticalGroup(
+            memberPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(memberPaneLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(btnAdminAddMember)
+                .addGap(26, 26, 26)
+                .addComponent(addMemberPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(219, Short.MAX_VALUE))
+        );
+
+        jTabbedPane.addTab("Member", memberPane);
+
+        lblWelcome.setText("Hi,Welcome");
+
+        btnLogout.setText("Log Out");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTabbedPane, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(lblWelcome)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnLogout)
+                .addGap(47, 47, 47))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(133, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblWelcome)
                     .addComponent(btnLogout))
                 .addGap(18, 18, 18)
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
+                .addComponent(jTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(topPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 15, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(topPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);
 
         pack();
     }// </editor-fold>                        
 
-    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {                                          
+    private void teamSearchButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                 
         // TODO add your handling code here:
-    }                                         
+    	CardLayout cl = (CardLayout)(cardPanel.getLayout());
+        cl.show(cardPanel, "card1");
+        cardPanel.setVisible(true);
+        txtProjectName.setText("");
+        projectSearchPanel.revalidate();
+    	projectSearchPanel.repaint();
+    }                                                
 
-    private void rtbnProjectActionPerformed(java.awt.event.ActionEvent evt) {                                            
+    private void projectSearchButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                    
         // TODO add your handling code here:
-    }                                           
+    	 CardLayout cl = (CardLayout)(cardPanel.getLayout());
+         cl.show(cardPanel, "card2");
+         cardPanel.setVisible(true);
+    }                                          
 
-    private void rbtnTeamMemberActionPerformed(java.awt.event.ActionEvent evt) {                                               
+    private void jTabbedPaneMouseClicked(java.awt.event.MouseEvent evt) {                                         
         // TODO add your handling code here:
-    }                                              
-
-    private void txtParticipantNameActionPerformed(java.awt.event.ActionEvent evt) {                                                   
+        System.out.print("HI I am clicked here");
+        cardPanel.setVisible(false);
+        buttonGroup1.clearSelection();
+    }   
+    
+    private void btn1SearchActionPerformed(java.awt.event.ActionEvent evt) {                                           
         // TODO add your handling code here:
-    }                                                  
+    	String projectName = txtProjectName.getText();
+    	projectTableController.readProjectbyUser(projectName);
+    	jTable2 = new JTable(projectTableController.getTableModel());
+     	jScrollPane2 = new JScrollPane(jTable2);
+        jScrollPane2.setViewportView(jTable2);
+    	System.out.println("Search action performed");
+    	projectSearchPanel.setLayout(new BorderLayout());
+    	projectSearchPanel.add(jScrollPane2, BorderLayout.CENTER);
+    	txtProjectName.setText("");
+    	projectSearchPanel.revalidate();
+    	projectSearchPanel.repaint();
+    } 
 
-    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {                                          
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {                                              
         // TODO add your handling code here:
-    }                                         
+    	String userName = txtParticipantName.getText();
+    	taskInfoController.readTaskbyUser(userName);
+    	jTable1 = new JTable(taskInfoController.getTableModel());
+    	jScrollPane1 = new JScrollPane(jTable1);
+    	jScrollPane1.setViewportView(jTable1);
+    	teamSearchPanel.setLayout(new BorderLayout());
+    	teamSearchPanel.add(jScrollPane1, BorderLayout.CENTER);
+    	txtParticipantName.setText("");
+    	teamSearchPanel.revalidate();
+    	teamSearchPanel.repaint();
+    	
+    	
+    } 
+    
+    private void btnViewBudgetActionPerformed(java.awt.event.ActionEvent evt) {                                              
+        // TODO add your handling code here:
+    }  
+    
+    
+    private void btnAdminAddMemberActionPerformed(java.awt.event.ActionEvent evt) {                                                  
+        // TODO add your handling code here:
+    }                                                 
 
+    private void btnAdminAddTeamActionPerformed(java.awt.event.ActionEvent evt) {                                                
+        // TODO add your handling code here:
+    }      
+    
     /**
      * @param args the command line arguments
      */
@@ -371,13 +545,13 @@ public class AdminHomePageGUI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdminHomePageGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminHomeGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdminHomePageGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminHomeGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdminHomePageGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminHomeGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdminHomePageGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminHomeGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -390,26 +564,25 @@ public class AdminHomePageGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify                     
-    private javax.swing.JPanel MemberPanel;
-    private javax.swing.JPanel SearchPanel;
-    private javax.swing.JPanel TeamPanel;
-    private javax.swing.JPanel TeamTable;
     private javax.swing.JButton btnLogout;
-    private javax.swing.JButton btnSearch;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JPanel cardPanel;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JPanel memberPane;
+    private javax.swing.JTabbedPane jTabbedPane;
     private javax.swing.JLabel lblExistingTeams;
-    private javax.swing.JLabel lblParticipantName;
-    private javax.swing.JLabel lblProjectName;
-    private javax.swing.JLabel lblSearch;
     private javax.swing.JLabel lblWelcome;
-    private javax.swing.JPanel projectSearchPanel;
-    private javax.swing.JRadioButton rbtnTeamMember;
-    private javax.swing.JRadioButton rtbnProject;
-    private javax.swing.JPanel teamSearchPanel;
-    private javax.swing.JPanel topPanel;
-    private javax.swing.JTextField txtParticipantName;
-    private javax.swing.JTextField txtProjectName;
+    private javax.swing.JRadioButton projectSearchButton;
+    private javax.swing.JPanel searchPane;
+    private javax.swing.JPanel teamPane;
+    private javax.swing.JRadioButton teamSearchButton;
+    private javax.swing.JPanel teamTablePanel;
+    private javax.swing.JPanel addMemberPanel;
+    private javax.swing.JButton btnAdminAddMember;
+    private javax.swing.JButton btnAdminAddTeam;
+    
+    
+    
     // End of variables declaration                   
 }

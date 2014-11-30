@@ -226,7 +226,6 @@ public class AdminHomeGUI extends javax.swing.JFrame {
 
 	private void rtbnProjectActionPerformed(java.awt.event.ActionEvent evt) {                                            
 		// TODO add your handling code here:
-		SearchPanel.add(new JLabel("Hi Sruti"));
 		//SearchPanel.add(lblProjectName);
 		//SearchPanel.add(txtProjectName);
 	}

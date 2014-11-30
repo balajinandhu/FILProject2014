@@ -13,12 +13,8 @@ import java.util.*;
  * @author rgrover
  */
 
-
-public class ProjectInfoModel  extends AbstractTableModel {
-	
-	List<ProjectInfo> projectTableResultList; // stores the model data in a List collection of type CourseList
-	
-	
+public class ProjectUserModel  extends AbstractTableModel {
+	List<ProjectUser> projectUserResultList; // stores the model data in a List collection of type CourseList
 	private static final String PERSISTENCE_UNIT_NAME = "PersistenceUnit"; // Used in persistence.xml
 	private static EntityManagerFactory factory; // JPA 
 	private EntityManager manager; // JPA 
@@ -26,20 +22,12 @@ public class ProjectInfoModel  extends AbstractTableModel {
 	// This field contains additional information about the results 
 	private ProjectInfoService projectTableService;
 	private int numcols, numrows; // number of rows and columns
-	ProjectInfoModel () {
+	public ProjectUserModel() {
+		// TODO Auto-generated constructor stub
 		factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 		manager = factory.createEntityManager();
 		table = new ProjectInfo();
 		projectTableService = new ProjectInfoService(manager);
-
-		// read all the records from courselist
-		
-		
-		// update the number of rows and columns in the model
-		numrows = projectTableResultList.size();
-		numcols = table.getNumberOfColumns();
-	//	System.out.println("num rows " + numrows + " cols " + numcols + " size " + ListResult.projectTableResultList.size() +
-			//	"Size1 " + ListResult.usetInfoResultList.size());
 	}
 
 	// returns a count of the number of rows16
@@ -54,7 +42,7 @@ public class ProjectInfoModel  extends AbstractTableModel {
 	public Object getValueAt(int row, int col) {
 		try {
 			//if (col < 2) 
-			return  projectTableResultList.get(row).getColumnData(col);
+			return ((ProjectUser) projectUserResultList.get(row)).getColumnData(col);
 
 			//else
 			//	return ListResult.usetInfoResultList.get(row).getColumnData(col);
@@ -84,28 +72,34 @@ public class ProjectInfoModel  extends AbstractTableModel {
 	public void setValueAt(Object aValue, int row, int col) {
 		//data[rowIndex][columnIndex] = (String) aValue;
 		try {
-			ProjectInfo element = projectTableResultList.get(row);
-			element.setColumnData(col, aValue); 
+			ProjectUser element =projectUserResultList.get(row);
+	//		element.setColumnData(col, aValue); 
 			fireTableCellUpdated(row, col);
 		} catch(Exception err) {
 			err.toString();
 		}
 	}
-	public List<ProjectInfo> getList() {
-		return projectTableResultList;
+	public List<ProjectUser> getList() {
+		return projectUserResultList;
 	}
 	public EntityManager getEntityManager() {
 		return manager;
 	}
 	// create a new table model using the existing data in list
-	public ProjectInfoModel(List<ProjectInfo> list, EntityManager em) {
-		projectTableResultList = list;
-		numrows = projectTableResultList.size();
+	public ProjectUserModel(List<ProjectUser> list, EntityManager em) {
+		projectUserResultList = list;
+		numrows = projectUserResultList.size();
 		table = new ProjectInfo();
 		numcols = table.getNumberOfColumns(); 
 		manager = em; 
 		projectTableService = new ProjectInfoService(manager);
 	}
 
+	public List<ProjectUser> readProjectbyUser(String projectName) {
+		projectUserResultList = projectTableService.readProjectbyUser(projectName);
+		numrows = projectUserResultList.size();
+		numcols = table.getNumberOfColumns();
+		return projectUserResultList;
+	}
 
 }

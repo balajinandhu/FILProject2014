@@ -1,6 +1,8 @@
 package package1;
 
 
+import java.awt.List;
+
 import javax.sql.RowSetEvent;
 import javax.sql.RowSetListener;
 import javax.swing.ListSelectionModel;
@@ -13,13 +15,16 @@ import javax.swing.table.TableModel;
 
 public class ProjectInfoController implements TableModelListener {
 private ProjectInfoModel tableModel;
+private ProjectUserModel tableModel1;
+
 //private HomePageGUI gui;
-private HomePageGUI gui;
+private AdminHomePageGUI gui;
 int firstIndex;
-public ProjectInfoController(HomePageGUI gui) {
+public ProjectInfoController(AdminHomePageGUI gui) {
 	this.gui = gui; 
 	// create the tableModel using the data in the cachedRowSet
-	tableModel = new ProjectInfoModel();
+	tableModel1 = new ProjectUserModel();
+	
 	//jtable1.setModel(this.getTableModel());
 	//gui.updateTable();
 
@@ -31,11 +36,12 @@ public ProjectInfoController(HomePageGUI gui) {
 
 // new code
 public TableModel getTableModel() {
-	return tableModel;
+	return tableModel1;
 }
 
 public void tableChanged(TableModelEvent e)
 {
+	
    try {
     	// get the index of the inserted row
         //tableModel.getRowSet().moveToCurrentRow();
@@ -56,6 +62,9 @@ public void tableChanged(TableModelEvent e)
 	exp.printStackTrace();
 	}
 }
- 
+public void readProjectbyUser(String projectName) {
+	tableModel1.readProjectbyUser(projectName);
+	
+}
 
 }

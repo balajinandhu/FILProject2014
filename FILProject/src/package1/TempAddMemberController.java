@@ -11,20 +11,21 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 
 
-public class TeamInfoController {// implements ListSelectionListener,TableModelListener{
-	private TeamInfoModel TeamtableModel;
+public class TempAddMemberController {// implements ListSelectionListener,TableModelListener{
+	private TempAddMemberModel TempAddMemberModel;
 	private AdminHomePageGUI gui;
 	int firstIndex;
-	public TeamInfoController(AdminHomePageGUI gui) {
+	public TempAddMemberController(AdminHomePageGUI gui) {
+		// TODO Auto-generated constructor stub
 		this.gui = gui; 
 		// create the tableModel using the data in the cachedRowSet
-		TeamtableModel = new TeamInfoModel(); 
+		TempAddMemberModel = new TempAddMemberModel(); 
 	}
 
 
 	// new code
 	public TableModel getTableModel() {
-		return TeamtableModel;
+		return TempAddMemberModel;
 	}
 
 

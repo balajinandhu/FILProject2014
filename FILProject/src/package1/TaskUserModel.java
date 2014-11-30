@@ -13,33 +13,21 @@ import java.util.*;
  * @author rgrover
  */
 
-
-public class ProjectInfoModel  extends AbstractTableModel {
-	
-	List<ProjectInfo> projectTableResultList; // stores the model data in a List collection of type CourseList
-	
-	
+public class TaskUserModel  extends AbstractTableModel {
+	List<TaskUser> taskUserResultList; // stores the model data in a List collection of type CourseList
 	private static final String PERSISTENCE_UNIT_NAME = "PersistenceUnit"; // Used in persistence.xml
 	private static EntityManagerFactory factory; // JPA 
 	private EntityManager manager; // JPA 
-	private ProjectInfo table;// represents the entity courselist
+	private TaskUser table;// represents the entity courselist
 	// This field contains additional information about the results 
-	private ProjectInfoService projectTableService;
+	private TaskInfoService taskInfoService;
 	private int numcols, numrows; // number of rows and columns
-	ProjectInfoModel () {
+	public TaskUserModel() {
+		// TODO Auto-generated constructor stub
 		factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 		manager = factory.createEntityManager();
-		table = new ProjectInfo();
-		projectTableService = new ProjectInfoService(manager);
-
-		// read all the records from courselist
-		
-		
-		// update the number of rows and columns in the model
-		numrows = projectTableResultList.size();
-		numcols = table.getNumberOfColumns();
-	//	System.out.println("num rows " + numrows + " cols " + numcols + " size " + ListResult.projectTableResultList.size() +
-			//	"Size1 " + ListResult.usetInfoResultList.size());
+		table = new TaskUser();
+		taskInfoService = new TaskInfoService(manager);
 	}
 
 	// returns a count of the number of rows16
@@ -54,7 +42,8 @@ public class ProjectInfoModel  extends AbstractTableModel {
 	public Object getValueAt(int row, int col) {
 		try {
 			//if (col < 2) 
-			return  projectTableResultList.get(row).getColumnData(col);
+			System.out.println(taskUserResultList.get(row));
+			return (taskUserResultList.get(row)).getColumnData(col);
 
 			//else
 			//	return ListResult.usetInfoResultList.get(row).getColumnData(col);
@@ -84,28 +73,34 @@ public class ProjectInfoModel  extends AbstractTableModel {
 	public void setValueAt(Object aValue, int row, int col) {
 		//data[rowIndex][columnIndex] = (String) aValue;
 		try {
-			ProjectInfo element = projectTableResultList.get(row);
-			element.setColumnData(col, aValue); 
+			TaskUser element = taskUserResultList.get(row);
+	//		element.setColumnData(col, aValue); 
 			fireTableCellUpdated(row, col);
 		} catch(Exception err) {
 			err.toString();
 		}
 	}
-	public List<ProjectInfo> getList() {
-		return projectTableResultList;
+	public List<TaskUser> getList() {
+		return taskUserResultList;
 	}
 	public EntityManager getEntityManager() {
 		return manager;
 	}
 	// create a new table model using the existing data in list
-	public ProjectInfoModel(List<ProjectInfo> list, EntityManager em) {
-		projectTableResultList = list;
-		numrows = projectTableResultList.size();
-		table = new ProjectInfo();
+	public TaskUserModel(List<TaskUser> list, EntityManager em) {
+		taskUserResultList = list;
+		numrows = taskUserResultList.size();
+		table = new TaskUser();
 		numcols = table.getNumberOfColumns(); 
 		manager = em; 
-		projectTableService = new ProjectInfoService(manager);
+		taskInfoService = new TaskInfoService(manager);
 	}
 
+	public List<TaskUser> readTaskbyUser(String userName) {
+		taskUserResultList = taskInfoService.readTaskbyUser(userName);
+		numrows = taskUserResultList.size();
+		numcols = table.getNumberOfColumns();
+		return taskUserResultList;
+	}
 
 }
