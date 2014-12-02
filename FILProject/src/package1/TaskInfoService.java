@@ -19,7 +19,7 @@ public class TaskInfoService {
 				+ "p.project_name, t.outcome)"
 				+ " FROM TaskInfo t JOIN "
 				+ "ProjectInfo p WHERE t.project_ID = p.project_ID"
-				+ " AND t.user_ID = (SELECT e.user_ID from UserRecord e"
+				+ " AND t.user_name = (SELECT e.user_name from UserRecord e"
 				+ " WHERE e.user_name = ?1)", TaskUser.class)
 				.setParameter(1, userName)
 				.getResultList();

@@ -1,12 +1,17 @@
 package package1;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.TableModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -29,15 +34,18 @@ public class AdminHomePageGUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable4;
+    private javax.swing.JTable jTable5;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btn1Search;
     private javax.swing.JButton btnViewBudget;
     private javax.swing.JPanel AdminTeamPanel;
+    private javax.swing.JPanel titlePanel;
    
     
     /**
@@ -48,6 +56,7 @@ public class AdminHomePageGUI extends javax.swing.JFrame {
     private TeamInfoController teamInfoController;
     private TaskInfoController taskInfoController;
     private TempAddMemberController tempAddMemberController;
+    private TempAddTeamController tempAddTeamController;
     
     public AdminHomePageGUI() {
         initComponents();
@@ -55,6 +64,7 @@ public class AdminHomePageGUI extends javax.swing.JFrame {
         teamInfoController = new TeamInfoController(this);
         taskInfoController = new TaskInfoController(this);
         tempAddMemberController = new TempAddMemberController(this);
+        tempAddTeamController = new TempAddTeamController(this);
         addJTable();
         
        
@@ -211,16 +221,29 @@ public class AdminHomePageGUI extends javax.swing.JFrame {
     	// add the table to a scrollpane
     	jtable3 = new JTable(teamInfoController.getTableModel());
         JScrollPane scrollpane = new JScrollPane(jtable3);
+        scrollpane.setPreferredSize(new Dimension(600, 200));
     	// create a window
     	teamTablePanel.setLayout(new BorderLayout());
     	teamTablePanel.add(scrollpane, BorderLayout.CENTER);
     	
     	
     	jTable4 = new JTable(tempAddMemberController.getTableModel());
+    	// add a ListSelectionListener to the table
+    	jTable4.getSelectionModel().addListSelectionListener(tempAddMemberController);
         jScrollPane4 = new JScrollPane(jTable4);
+        jScrollPane4.setPreferredSize(new Dimension(600, 200));
     	// create a window
     	addMemberPanel.setLayout(new BorderLayout());
     	addMemberPanel.add(jScrollPane4, BorderLayout.CENTER);
+    	
+    	jTable5 = new JTable(tempAddTeamController.getTableModel());
+    	// add a ListSelectionListener to the table
+    	jTable5.getSelectionModel().addListSelectionListener(tempAddTeamController);
+        jScrollPane5 = new JScrollPane(jTable5);
+        jScrollPane5.setPreferredSize(new Dimension(600, 200));
+    	// create a window
+    	AdminTeamPanel.setLayout(new BorderLayout());
+    	AdminTeamPanel.add(jScrollPane5, BorderLayout.CENTER);
     	
 
     }
@@ -251,7 +274,12 @@ public class AdminHomePageGUI extends javax.swing.JFrame {
         memberPane = new javax.swing.JPanel();
         addMemberPanel = new javax.swing.JPanel();
         btnAdminAddMember = new javax.swing.JButton();
-
+        titlePanel = new JPanel();
+        
+        ImagePanel panel = new ImagePanel(new ImageIcon("FIL.jpg").getImage());
+        
+        titlePanel.add(panel);
+        
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -328,11 +356,13 @@ public class AdminHomePageGUI extends javax.swing.JFrame {
             .addGap(0, 159, Short.MAX_VALUE)
         );
 
+        AdminTeamPanel.setMaximumSize(new java.awt.Dimension(600, 250));
+
         javax.swing.GroupLayout AdminTeamPanelLayout = new javax.swing.GroupLayout(AdminTeamPanel);
         AdminTeamPanel.setLayout(AdminTeamPanelLayout);
         AdminTeamPanelLayout.setHorizontalGroup(
             AdminTeamPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 568, Short.MAX_VALUE)
+            .addGap(0, 599, Short.MAX_VALUE)
         );
         AdminTeamPanelLayout.setVerticalGroup(
             AdminTeamPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -355,7 +385,7 @@ public class AdminHomePageGUI extends javax.swing.JFrame {
                     .addGroup(teamPaneLayout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addComponent(AdminTeamPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(49, 49, 49)
+                        .addGap(18, 18, 18)
                         .addComponent(btnAdminAddTeam))
                     .addGroup(teamPaneLayout.createSequentialGroup()
                         .addContainerGap()
@@ -370,11 +400,11 @@ public class AdminHomePageGUI extends javax.swing.JFrame {
             .addGroup(teamPaneLayout.createSequentialGroup()
                 .addGroup(teamPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(teamPaneLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(AdminTeamPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(teamPaneLayout.createSequentialGroup()
                         .addGap(25, 25, 25)
-                        .addComponent(btnAdminAddTeam)))
+                        .addComponent(btnAdminAddTeam))
+                    .addGroup(teamPaneLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(AdminTeamPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(lblExistingTeams)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -431,6 +461,17 @@ public class AdminHomePageGUI extends javax.swing.JFrame {
 
         btnLogout.setText("Log Out");
 
+        javax.swing.GroupLayout titlePanelLayout = new javax.swing.GroupLayout(titlePanel);
+        titlePanel.setLayout(titlePanelLayout);
+        titlePanelLayout.setHorizontalGroup(
+            titlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        titlePanelLayout.setVerticalGroup(
+            titlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 116, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -442,11 +483,16 @@ public class AdminHomePageGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnLogout)
                 .addGap(47, 47, 47))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addComponent(titlePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(133, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(titlePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblWelcome)
                     .addComponent(btnLogout))
@@ -456,6 +502,7 @@ public class AdminHomePageGUI extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);
+
 
         pack();
     }// </editor-fold>                        
@@ -490,6 +537,7 @@ public class AdminHomePageGUI extends javax.swing.JFrame {
     	projectTableController.readProjectbyUser(projectName);
     	jTable2 = new JTable(projectTableController.getTableModel());
      	jScrollPane2 = new JScrollPane(jTable2);
+     	jScrollPane2.setPreferredSize(new Dimension(600, 200));
         jScrollPane2.setViewportView(jTable2);
     	System.out.println("Search action performed");
     	projectSearchPanel.setLayout(new BorderLayout());
@@ -505,6 +553,7 @@ public class AdminHomePageGUI extends javax.swing.JFrame {
     	taskInfoController.readTaskbyUser(userName);
     	jTable1 = new JTable(taskInfoController.getTableModel());
     	jScrollPane1 = new JScrollPane(jTable1);
+    	jScrollPane1.setPreferredSize(new Dimension(600, 200));
     	jScrollPane1.setViewportView(jTable1);
     	teamSearchPanel.setLayout(new BorderLayout());
     	teamSearchPanel.add(jScrollPane1, BorderLayout.CENTER);
@@ -522,11 +571,40 @@ public class AdminHomePageGUI extends javax.swing.JFrame {
     
     private void btnAdminAddMemberActionPerformed(java.awt.event.ActionEvent evt) {                                                  
         // TODO add your handling code here:
+    	int selectedrow = jTable4.getSelectedRow();
+    	
+    	TableModel tm= jTable4.getModel();
+    	String[] name = new String[jTable4.getColumnCount()];
+    	name[0] = (String) tm.getValueAt(selectedrow, 0);
+    	name[1] = (String) tm.getValueAt(selectedrow, 1);
+    	name[2] = (String) tm.getValueAt(selectedrow, 2);
+    	
+    	 tempAddMemberController.addMemberRow(name, selectedrow);
+    	
     }                                                 
 
     private void btnAdminAddTeamActionPerformed(java.awt.event.ActionEvent evt) {                                                
         // TODO add your handling code here:
-    }      
+    	int selectedrow = jTable5.getSelectedRow();
+    	
+    	TableModel tm= jTable5.getModel();
+    	String[] name = new String[jTable5.getColumnCount()];
+    	int rowIndex = jTable5.getSelectedRow();
+    	name[0] = (String) tm.getValueAt(selectedrow, 0);
+    	name[1] = (String) tm.getValueAt(selectedrow, 1);
+    	name[2] = (String) tm.getValueAt(selectedrow, 2);
+    	name[3] = (String) tm.getValueAt(selectedrow, 3);
+    	name[4] = (String) tm.getValueAt(selectedrow, 4);
+    	
+    	 tempAddTeamController.addTeamRow(rowIndex, name);
+    }    
+    
+    
+    
+ 
+    
+    
+    
     
     /**
      * @param args the command line arguments
@@ -545,13 +623,13 @@ public class AdminHomePageGUI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdminHomeGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminHomePageGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdminHomeGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminHomePageGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdminHomeGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminHomePageGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdminHomeGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminHomePageGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 

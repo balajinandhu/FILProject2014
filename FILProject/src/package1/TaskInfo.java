@@ -70,7 +70,6 @@ public class TaskInfo implements Serializable {
 	@Column(name = "task_ID")
 	private int task_ID;
 
-	//@JoinColumn(name="team_ID")
 	@Column
 	private int project_ID;
 
@@ -84,7 +83,7 @@ public class TaskInfo implements Serializable {
 	private String outcome;
 	
 	@Column
-	private int user_ID;
+	private String user_name;
 	
 	@Column
 	private int project_metric_ID;
@@ -127,12 +126,12 @@ public class TaskInfo implements Serializable {
 		this.outcome = outcome;
 	}
 	
-	public int getUser_ID() {
-		return user_ID;
+	public String getUser_name() {
+		return user_name;
 	}
 	
-	public void setUser_ID(int userid) {
-		this.user_ID = userid;
+	public void setUser_name(String username) {
+		this.user_name = username;
 	}
 	
 	public void setProject_metric_ID(int budget) {
@@ -160,13 +159,13 @@ public class TaskInfo implements Serializable {
 		else if(i == 4)
 			return getOutcome();
 		else if(i == 5)
-			return getUser_ID();
+			return getUser_name();
 		else if(i == 6)
 			return getProject_ID();
 		else if(i == 7)
 			return getProject_metric_ID();
 		else
-			throw new Exception("Error: invalid column index in courselist table"); 
+			throw new Exception("Error: invalid column index in taskinfo table"); 
 	}
 
 	// return the name of column i
@@ -183,13 +182,13 @@ public class TaskInfo implements Serializable {
 		else if (i == 4) // 4
 			colName = "Outcome";
 		else if(i == 5)
-			colName = "User ID";
+			colName = "User name";
 		else if(i == 6)
 			colName = "Project Metric ID";
 		else if (i == 7)
 			colName = "Project Metric Value";
 		else
-			throw new Exception("Access to invalid column number in courselist table");
+			throw new Exception("Access to invalid column number in taskinfo table");
 
 		return colName;
 	}
@@ -207,7 +206,7 @@ public class TaskInfo implements Serializable {
 		else if (i == 4)
 			outcome = (String) value;
 		else if(i == 5)
-			user_ID = (int) value;
+			user_name = (String) value;
 		else if(i == 6)
 			project_metric_ID = (int) value;
 		else if (i == 7)
@@ -219,7 +218,7 @@ public class TaskInfo implements Serializable {
 	@Override
 	public String toString() {
 		return "TaskInfo [Task_ID =" + task_ID + ", " + " Project_ID =" + project_ID + "," + " Start_date =" + start_date +
-				" End_date =" + end_date + ","+"User_ID =" + user_ID +","+"Outcome =" + outcome + "," + " Project_metric_ID =" 
+				" End_date =" + end_date + ","+"User_name =" + user_name+","+"Outcome =" + outcome + "," + " Project_metric_ID =" 
 				+ project_metric_ID + "," + " Project_Metric_Value =" + project_metric_value +"]";
 	}
 }

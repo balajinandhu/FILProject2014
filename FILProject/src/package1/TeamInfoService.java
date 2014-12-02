@@ -15,7 +15,7 @@ public class TeamInfoService {
 	public TeamInfo createCourse(int teamid, String teamname) {
 		TeamInfo team = new TeamInfo();
 		
-		team.setTeam_ID(teamid);
+		team.setTeam_strength(teamid);
 		team.setTeam_name(teamname);
 		manager.persist(team);
 		return team;
@@ -38,7 +38,7 @@ public class TeamInfoService {
 		TeamInfo team = manager.find(TeamInfo.class, teamid);
 		if (team != null) {
 			
-			team.setTeam_ID(teamid);
+			team.setTeam_strength(teamid);
 			team.setTeam_name(teamname);
 			
 		}

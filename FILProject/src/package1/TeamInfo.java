@@ -10,18 +10,12 @@ import java.util.Set;
 public class TeamInfo implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
-	@Column(name = "team_ID")
-	private int team_ID;
-
-	@Column
+	@Column(name = "team_name")
 	private String team_name;
 
-	public int getTeam_ID() {
-		return team_ID;
-	}
-	public void setTeam_ID(int teamid) {
-		this.team_ID = teamid;
-	}
+	@Column
+	private int team_strength;
+
 	public String getTeam_name() {
 		return team_name;
 	}
@@ -29,7 +23,15 @@ public class TeamInfo implements Serializable {
 		this.team_name = name;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy="teamid")
+	public int getTeam_strength() {
+		return team_strength;
+	}
+	public void setTeam_strength(int strength) {
+		this.team_strength = strength;
+	}
+
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="teaminfo")
 
 	private Set<ProjectInfo> records;
 
@@ -41,18 +43,30 @@ public class TeamInfo implements Serializable {
 
 
 
-	/*   public void setRecords(Set<ProjectInfo> records) {
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="teaminfo")
 
-	  this.records = records;
+	private Set<UserRecord> userRecord;
 
-	   } 
+	public Set<UserRecord> getUserRecord() {
 
-	   public Set<UserRecord> getRecords1() {
+		return userRecord;
+	}
 
-			  return records1;
+	public void setUserRecord(Set<UserRecord> userRecord) {
 
-			   } */
+		this.userRecord = userRecord;
+	}
 
+	public TeamInfo() {
+
+		team_name = "";
+		team_strength = 0;
+	}
+
+	public TeamInfo(String team_name, int team_strength) {
+		this.team_name = team_name;
+		this.team_strength = team_strength;
+	}
 
 	// return number of columns in the table
 	public int getNumberOfColumns() {
@@ -61,23 +75,24 @@ public class TeamInfo implements Serializable {
 
 	// return the data in column i
 	public Object getColumnData(int i) throws Exception {
+
 		if (i == 0)
-			return getTeam_ID();
-		else if (i == 1)
 			return getTeam_name();
+		else if (i == 1)
+			return getTeam_strength();
 		else
-			throw new Exception("Error: invalid column index in courselist table"); 
+			throw new Exception("Error: invalid column index in teaminfo table"); 
 	}
 
 	// return the name of column i
 	public String getColumnName(int i) throws Exception {
 		String colName = null;
-		if (i == 0) 
-			colName = "Team_ID";
-		else if (i == 1)
+		if (i == 0)
 			colName = "Team_name";
+		else if (i == 1) 
+			colName = "Team_strength";
 		else
-			throw new Exception("Access to invalid column number in courselist table");
+			throw new Exception("Access to invalid column number in teaminfo table");
 
 		return colName;
 	}
@@ -85,16 +100,16 @@ public class TeamInfo implements Serializable {
 	// set data column i to value
 	public void setColumnData(int i, Object value) throws Exception {
 		if (i == 0) 
-			team_ID = (int) value;
-		else if (i == 1) 
 			team_name = (String) value;
+		else if (i == 1) 
+			team_strength = (int) value;
 		else
-			throw new Exception("Error: invalid column index in courselist table"); 
+			throw new Exception("Error: invalid column index in teaminfo table"); 
 	}
 
 	@Override
 	public String toString() {
-		return "TeamInfo [Team_ID =" + team_ID + ", " + " Team_name =" + team_name +"]";
+		return "TeamInfo [ Team_name =" + team_name  + ", " + " Team_strength =" + team_strength+"]";
 	}
 }
 

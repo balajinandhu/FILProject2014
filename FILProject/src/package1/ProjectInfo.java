@@ -31,6 +31,10 @@ class ProjectUser {
 				" user_name =" + user_name;
 	}
 	
+	public int getNumberOfColumns() {
+		return 3;
+	}
+	
 	public String getColumnName(int i) throws Exception {
 		String colName = null;
 		
@@ -73,9 +77,9 @@ public class ProjectInfo implements Serializable {
 	@Column(name = "project_ID")
 	private int project_ID;
 
-	@JoinColumn(name="team_ID")
+	@JoinColumn(name="team_name")
 	@Column
-	private int team_ID;
+	private String team_name;
 
 	@Column
 	private String project_name;
@@ -97,17 +101,21 @@ public class ProjectInfo implements Serializable {
 
 	@Column
 	private int estimated_budget;
+	
+	@Column
+	private String outcome;
+
 
 	@ManyToOne(cascade=CascadeType.ALL)
 
-	@PrimaryKeyJoinColumn(name="team_ID")
+	@PrimaryKeyJoinColumn(name="team_name")
 
-	private TeamInfo teamid; 
+	private TeamInfo teaminfo; 
 
 	@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(name="ProjectUser_map", joinColumns={
 			@JoinColumn(name="project_ID", nullable=false, updatable=false)},
-			inverseJoinColumns={ @JoinColumn(name="user_ID", nullable=false, updatable=false)})
+			inverseJoinColumns={ @JoinColumn(name="user_name", nullable=false, updatable=false)})
 	private Set<UserRecord> userrecord;
 	public Set<UserRecord> getUserRecord() {
 		return userrecord;
@@ -118,11 +126,11 @@ public class ProjectInfo implements Serializable {
 	public void setProject_ID(int id) {
 		this.project_ID = id;
 	}
-	public int getTeam_ID() {
-		return team_ID;
+	public String getTeam_name() {
+		return team_name;
 	}
-	public void setTeam_ID(int id) {
-		this.team_ID = id;
+	public void setTeam_name(String name) {
+		this.team_name = name;
 	}
 
 	public String getProject_name() {
@@ -172,35 +180,38 @@ public class ProjectInfo implements Serializable {
 	public int getEstimated_budget() {
 		return estimated_budget;
 	}
-
+	
+	public String getOutcome() {
+		return status;
+	}
+	public void setOutcome(String outcome) {
+		this.outcome = outcome;
+	}
 
 	public String getTeamInfo() {
-		return teamid.getTeam_name();
+		return teaminfo.getTeam_name();
 	} 
 
 
 	// return number of columns in the table
 	public int getNumberOfColumns() {
-		return 3;
+		return 10;
 	}
 
 	// return the data in column i
 	public Object getColumnData(int i) throws Exception {
-	/*	if (i == 0)
+		if (i == 0)
 			return getProject_ID();
-		else if (i == 1) // 1
-			return getTeam_ID();
+		else if (i == 1) 
+			return getTeam_name();
 		else if (i == 2) {
-			System.out.print(getUserRecord());
-			return getUserRecord();
+			return getProject_name();
 		}
 		//return getTeamInfo();
 		//return getProject_name(); 
-		/*	else if (i == 4) //3
-		 */
-
-		//return getProject_description();
-		/*	else if (i == 4) // 4
+		else if (i == 3)
+				return getProject_description();
+		else if (i == 4) 
 			return getStatus();
 		else if(i == 5)
 			return getTags();
@@ -209,22 +220,9 @@ public class ProjectInfo implements Serializable {
 		else if(i == 7)
 			return getEndDate();
 		else if(i == 8)
-			return getEstimated_budget();*/
-		
-		
-		if (i == 0) 
-			return getProject_description();
-		else if (i ==1)
-			return getStatus();
-		else if (i == 2) {
-			/*Iterator itr = getUserRecord().iterator();
-	        while(itr.hasNext())
-	        {
-	            System.out.println(itr.next());
-	        }*/
-			return getUserRecord();
-		}
-		
+			return getEstimated_budget();	
+		else if(i == 9)
+			return getOutcome();
 		else
 			throw new Exception("Error: invalid column index in courselist table"); 
 	}
@@ -232,15 +230,15 @@ public class ProjectInfo implements Serializable {
 	// return the name of column i
 	public String getColumnName(int i) throws Exception {
 		String colName = null;
-	/*	if (i == 0) // 0 
+		if (i == 0) 
 			colName = "Project_ID";
-		else if (i == 1) // 1
-			colName = "Team_ID";
+		else if (i == 1) 
+			colName = "Team_name";
 		else if (i == 2)
 			colName = "Project_name";
-		else if (i == 3) // 3
+		else if (i == 3) 
 			colName = "Project_description";
-		else if (i == 4) // 4
+		else if (i == 4) 
 			colName = "Status";
 		else if(i == 5)
 			colName = "Tags";
@@ -249,14 +247,9 @@ public class ProjectInfo implements Serializable {
 		else if (i == 7)
 			colName = "end_date";
 		else if(i == 8)
-			colName = "Estimated_budget"; */
-		
-		if(i == 0)
-			colName = "Project Description";
-		else if(i== 1)
-			colName = "Status";
-		else if(i ==2)
-			colName = "User Name";
+			colName = "Estimated_budget"; 
+		else if(i == 9)
+			colName = "Outcome";
 		else
 			throw new Exception("Access to invalid column number in courselist table");
 
@@ -268,7 +261,7 @@ public class ProjectInfo implements Serializable {
 		if (i == 0) 
 			project_ID = (int) value;
 		else if (i == 1) 
-			team_ID = (int) value;
+			team_name = (String) value;
 		else if (i == 2) 
 			project_name = (String) value;
 		else if (i == 3)
@@ -283,15 +276,19 @@ public class ProjectInfo implements Serializable {
 			end_date = (Date) value;
 		else if(i == 8) 
 			estimated_budget = (int) value;
+		else if(i == 9)
+			outcome = (String) value;
 		else
 			throw new Exception("Error: invalid column index in courselist table"); 
 	}
 
 	@Override
 	public String toString() {
-		return "ProjectInfo [Project_ID =" + project_ID + ", " + " Team_ID =" + team_ID + "," + " Project_name =" + project_name +
-				" Project_description =" + project_description + ","+"Status =" + status +","+"Tags =" + tag + "," + " Start Date =" 
-				+ start_date + "," + " End Date =" + end_date + "," + "Estimated Budget =" + estimated_budget +"]";
+		return "ProjectInfo [Project_ID =" + project_ID + ", " + " Team_ID =" + team_name + ""
+				+ "," + " Project_name =" + project_name + " Project_description =" + 
+				project_description + ","+"Status =" + status +","+"Tags =" + tag + "," +
+				" Start Date =" + start_date + "," + " End Date =" + end_date + "," 
+				+ "Estimated Budget =" + estimated_budget + " Outcome =" + outcome +"]";
 	}
 }
 

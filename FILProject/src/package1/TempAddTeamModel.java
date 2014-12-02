@@ -8,29 +8,29 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.swing.table.AbstractTableModel;
 
-public class TempAddMemberModel extends AbstractTableModel {
+public class TempAddTeamModel extends AbstractTableModel {
 
-	List<TempAddMember> TempAddMemberResultList; // stores the model data in a List collection of type CourseList
+	List<TempAddTeam> TempAddTeamResultList; // stores the model data in a List collection of type CourseList
 	private static final String PERSISTENCE_UNIT_NAME = "PersistenceUnit"; // Used in persistence.xml
 	private static EntityManagerFactory factory; // JPA 
 	private EntityManager manager; // JPA 
-	private TempAddMember tableAddMember;// represents the entity courselist
+	private TempAddTeam tableAddTeam;// represents the entity courselist
 	// This field contains additional information about the results 
-	private TempAddMemberService tempAddMemberService;
+	private TempAddTeamService tempAddTeamService;
 	private int numcols, numrows; // number of rows and columns
-	public TempAddMemberModel() {
+	public TempAddTeamModel() {
 		// TODO Auto-generated constructor stub
 		factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 		manager = factory.createEntityManager();
-		tableAddMember = new TempAddMember();
-		tempAddMemberService = new TempAddMemberService(manager);
+		tableAddTeam = new TempAddTeam();
+		tempAddTeamService = new TempAddTeamService(manager);
 
 		// read all the records from courselist
-		TempAddMemberResultList = tempAddMemberService.readAllData();
+		TempAddTeamResultList = tempAddTeamService.readAllData();
 
 		// update the number of rows and columns in the model
-		numrows = TempAddMemberResultList.size();
-		numcols = tableAddMember.getNumberOfColumns();
+		numrows = TempAddTeamResultList.size();
+		numcols = tableAddTeam.getNumberOfColumns();
 	}
 
 	// returns a count of the number of rows16
@@ -44,7 +44,7 @@ public class TempAddMemberModel extends AbstractTableModel {
 	// returns the data at the given row and column number
 	public Object getValueAt(int row, int col) {
 		try {
-			return TempAddMemberResultList.get(row).getColumnData(col);
+			return TempAddTeamResultList.get(row).getColumnData(col);
 		} catch (Exception e) {
 			e.getMessage();
 			return null;
@@ -60,7 +60,7 @@ public class TempAddMemberModel extends AbstractTableModel {
 	// returns the name of the column
 	public String getColumnName(int col) {
 		try {
-			return tableAddMember.getColumnName(col);
+			return tableAddTeam.getColumnName(col);
 		} catch (Exception err) {
 			return err.toString();
 		} 
@@ -69,40 +69,40 @@ public class TempAddMemberModel extends AbstractTableModel {
 	public void setValueAt(Object aValue, int row, int col) {
 		//data[rowIndex][columnIndex] = (String) aValue;
 		try {
-			TempAddMember element = TempAddMemberResultList.get(row);
+			TempAddTeam element = TempAddTeamResultList.get(row);
 			element.setColumnData(col, aValue); 
 			fireTableCellUpdated(row, col);
 		} catch(Exception err) {
 			err.toString();
 		}
 	}
-	public List<TempAddMember> getList() {
-		return TempAddMemberResultList;
+	public List<TempAddTeam> getList() {
+		return TempAddTeamResultList;
 	}
 	public EntityManager getEntityManager() {
 		return manager;
 	}
 	// create a new table model using the existing data in list
-	public TempAddMemberModel(List<TempAddMember> list, EntityManager em) {
-		TempAddMemberResultList = list;
-		numrows = TempAddMemberResultList.size();
-		tableAddMember = new TempAddMember();
-		numcols = tableAddMember.getNumberOfColumns(); 
+	public TempAddTeamModel(List<TempAddTeam> list, EntityManager em) {
+		TempAddTeamResultList = list;
+		numrows = TempAddTeamResultList.size();
+		tableAddTeam = new TempAddTeam();
+		numcols = tableAddTeam.getNumberOfColumns(); 
 		manager = em; 
-		tempAddMemberService = new TempAddMemberService(manager);
+		tempAddTeamService = new TempAddTeamService(manager);
 	}
 
 
-	public void addMemberRow(String[] name, int selectedRow) {
+	public void addTeamRow(int rowIndex, String[] name) {
 		//data[rowIndex][columnIndex] = (String) aValue;
 		// complete the code
 		EntityTransaction userTransaction = manager.getTransaction(); 
 		userTransaction.begin();
-		tempAddMemberService.createMember(name);
+		tempAddTeamService.createTeam(TempAddTeamResultList.get(rowIndex), name);
 		userTransaction.commit();
 		// set the current row to rowIndex
-		this.getList().remove(selectedRow);
-		fireTableRowsDeleted(selectedRow, selectedRow);			 
+		TempAddTeamResultList.remove(rowIndex);
+		fireTableRowsDeleted(rowIndex, rowIndex);
 		numrows--;
 
 	}

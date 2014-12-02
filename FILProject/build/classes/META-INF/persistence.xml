@@ -18,6 +18,8 @@
 
 <class> package1.TempAddMember </class>
 
+<class> package1.TempAddTeam </class>
+
 <properties>
 
 <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/project"/>

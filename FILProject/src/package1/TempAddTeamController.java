@@ -11,15 +11,15 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 
 
-public class TempAddMemberController implements ListSelectionListener { //,TableModelListener{
-	private TempAddMemberModel TempAddMemberModel;
+public class TempAddTeamController implements ListSelectionListener { //,TableModelListener{
+	private TempAddTeamModel TempAddTeamModel;
 	private AdminHomePageGUI gui;
 	int firstIndex;
-	public TempAddMemberController(AdminHomePageGUI gui) {
+	public TempAddTeamController(AdminHomePageGUI gui) {
 		// TODO Auto-generated constructor stub
 		this.gui = gui; 
 		// create the tableModel using the data in the cachedRowSet
-		TempAddMemberModel = new TempAddMemberModel(); 
+		TempAddTeamModel = new TempAddTeamModel(); 
 	}
 
 	
@@ -27,19 +27,21 @@ public class TempAddMemberController implements ListSelectionListener { //,Table
 		ListSelectionModel selectModel = (ListSelectionModel) e.getSource();
 		int firstIndex = selectModel.getMinSelectionIndex();
 		// read the data in each column using getValueAt and display it on corresponding textfield
-		TempAddMemberModel.getValueAt(firstIndex, 0);
-		TempAddMemberModel.getValueAt(firstIndex, 1);
-		TempAddMemberModel.getValueAt(firstIndex, 2);
+		TempAddTeamModel.getValueAt(firstIndex, 0);
+		TempAddTeamModel.getValueAt(firstIndex, 1);
+		TempAddTeamModel.getValueAt(firstIndex, 2);
+		TempAddTeamModel.getValueAt(firstIndex, 3);
+		TempAddTeamModel.getValueAt(firstIndex, 4);
 		 
 		}
 
 	// new code
 	public TableModel getTableModel() {
-		return TempAddMemberModel;
+		return TempAddTeamModel;
 	}
 	
-	public void addMemberRow(String[] name, int selectedRow) {
-		TempAddMemberModel.addMemberRow(name, selectedRow);
+	public void addTeamRow(int rowIndex, String[] name) {
+		TempAddTeamModel.addTeamRow(rowIndex, name);
 	}
 
 }
