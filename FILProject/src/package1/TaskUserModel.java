@@ -42,7 +42,6 @@ public class TaskUserModel  extends AbstractTableModel {
 	public Object getValueAt(int row, int col) {
 		try {
 			//if (col < 2) 
-			System.out.println(taskUserResultList.get(row));
 			return (taskUserResultList.get(row)).getColumnData(col);
 
 			//else

@@ -31,32 +31,6 @@ public class TeamInfo implements Serializable {
 	}
 
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy="teaminfo")
-
-	private Set<ProjectInfo> records;
-
-	public Set<ProjectInfo> getRecords() {
-
-		return records;
-
-	} 
-
-
-
-	@OneToMany(cascade = CascadeType.ALL, mappedBy="teaminfo")
-
-	private Set<UserRecord> userRecord;
-
-	public Set<UserRecord> getUserRecord() {
-
-		return userRecord;
-	}
-
-	public void setUserRecord(Set<UserRecord> userRecord) {
-
-		this.userRecord = userRecord;
-	}
-
 	public TeamInfo() {
 
 		team_name = "";
@@ -88,9 +62,9 @@ public class TeamInfo implements Serializable {
 	public String getColumnName(int i) throws Exception {
 		String colName = null;
 		if (i == 0)
-			colName = "Team_name";
+			colName = "Project Name";
 		else if (i == 1) 
-			colName = "Team_strength";
+			colName = "Project Strength";
 		else
 			throw new Exception("Access to invalid column number in teaminfo table");
 

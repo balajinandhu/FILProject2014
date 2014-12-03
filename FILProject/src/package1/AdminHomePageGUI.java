@@ -8,6 +8,7 @@ import java.awt.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -44,7 +45,7 @@ public class AdminHomePageGUI extends javax.swing.JFrame {
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btn1Search;
     private javax.swing.JButton btnViewBudget;
-    private javax.swing.JPanel AdminTeamPanel;
+    private javax.swing.JPanel ProjectRequestPanel;
     private javax.swing.JPanel titlePanel;
    
     
@@ -52,19 +53,19 @@ public class AdminHomePageGUI extends javax.swing.JFrame {
      * Creates new form AdminHomeGUI
      */
     private JTable jtable3; // the table displayed on the GUI
-    private ProjectInfoController projectTableController;
-    private TeamInfoController teamInfoController;
+    private ProjectUserController projectUserController;
     private TaskInfoController taskInfoController;
-    private TempAddMemberController tempAddMemberController;
-    private TempAddTeamController tempAddTeamController;
+    private TempAddUserController tempAddMemberController;
+    private ExistingProjectInfoController2 projectInfoController2;
+    private TempAddProjectController tempAddProjectController;
     
     public AdminHomePageGUI() {
         initComponents();
-        projectTableController = new ProjectInfoController(this);
-        teamInfoController = new TeamInfoController(this);
+        projectUserController = new ProjectUserController(this);
         taskInfoController = new TaskInfoController(this);
-        tempAddMemberController = new TempAddMemberController(this);
-        tempAddTeamController = new TempAddTeamController(this);
+        tempAddMemberController = new TempAddUserController(this);
+        tempAddProjectController = new TempAddProjectController(this);
+        projectInfoController2 = new ExistingProjectInfoController2(this);
         addJTable();
         
        
@@ -73,6 +74,7 @@ public class AdminHomePageGUI extends javax.swing.JFrame {
         btnSearch = new javax.swing.JButton();
         teamSearchPanel = new javax.swing.JPanel();
         lblParticipantName = new javax.swing.JLabel();
+      
         txtParticipantName = new javax.swing.JTextField();
        // jScrollPane1 = new javax.swing.JScrollPane();
     //    jTable1 = new javax.swing.JTable();
@@ -219,12 +221,12 @@ public class AdminHomePageGUI extends javax.swing.JFrame {
     //	jtable3.getSelectionModel().addListSelectionListener(projectTableController);
     	
     	// add the table to a scrollpane
-    	jtable3 = new JTable(teamInfoController.getTableModel());
+    	jtable3 = new JTable(projectInfoController2.getTableModel());
         JScrollPane scrollpane = new JScrollPane(jtable3);
         scrollpane.setPreferredSize(new Dimension(600, 200));
     	// create a window
-    	teamTablePanel.setLayout(new BorderLayout());
-    	teamTablePanel.add(scrollpane, BorderLayout.CENTER);
+    	ProjectTablePanel.setLayout(new BorderLayout());
+    	ProjectTablePanel.add(scrollpane, BorderLayout.CENTER);
     	
     	
     	jTable4 = new JTable(tempAddMemberController.getTableModel());
@@ -233,17 +235,17 @@ public class AdminHomePageGUI extends javax.swing.JFrame {
         jScrollPane4 = new JScrollPane(jTable4);
         jScrollPane4.setPreferredSize(new Dimension(600, 200));
     	// create a window
-    	addMemberPanel.setLayout(new BorderLayout());
-    	addMemberPanel.add(jScrollPane4, BorderLayout.CENTER);
+    	UserRequestPanel.setLayout(new BorderLayout());
+    	UserRequestPanel.add(jScrollPane4, BorderLayout.CENTER);
     	
-    	jTable5 = new JTable(tempAddTeamController.getTableModel());
+    	jTable5 = new JTable(tempAddProjectController.getTableModel());
     	// add a ListSelectionListener to the table
-    	jTable5.getSelectionModel().addListSelectionListener(tempAddTeamController);
+    	jTable5.getSelectionModel().addListSelectionListener(tempAddProjectController);
         jScrollPane5 = new JScrollPane(jTable5);
         jScrollPane5.setPreferredSize(new Dimension(600, 200));
     	// create a window
-    	AdminTeamPanel.setLayout(new BorderLayout());
-    	AdminTeamPanel.add(jScrollPane5, BorderLayout.CENTER);
+    	ProjectRequestPanel.setLayout(new BorderLayout());
+    	ProjectRequestPanel.add(jScrollPane5, BorderLayout.CENTER);
     	
 
     }
@@ -256,25 +258,42 @@ public class AdminHomePageGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
-    	 AdminTeamPanel = new javax.swing.JPanel();
+    	 ProjectRequestPanel = new javax.swing.JPanel();
+    	 ProjectTablePanel = new javax.swing.JPanel();
+    	 UserRequestPanel = new javax.swing.JPanel();
+    	 UserTablePanel = new javax.swing.JPanel();
+    	 
+    	 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        jPanel1 = new javax.swing.JPanel();
-        jTabbedPane = new javax.swing.JTabbedPane();
-        searchPane = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
         teamSearchButton = new javax.swing.JRadioButton();
         projectSearchButton = new javax.swing.JRadioButton();
-        cardPanel = new javax.swing.JPanel();
-        teamPane = new javax.swing.JPanel();
-        lblExistingTeams = new javax.swing.JLabel();
-        teamTablePanel = new javax.swing.JPanel();
-        lblWelcome = new javax.swing.JLabel();
         btnLogout = new javax.swing.JButton();
-        btnAdminAddTeam = new javax.swing.JButton();
-        memberPane = new javax.swing.JPanel();
-        addMemberPanel = new javax.swing.JPanel();
-        btnAdminAddMember = new javax.swing.JButton();
+        btnAcceptRequest = new javax.swing.JButton();
+        btnManageProjects = new javax.swing.JButton();
+        btnManageUsers = new javax.swing.JButton();
+        btnUserAcceptRequest = new javax.swing.JButton();
+        
+        
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+    //    jPanel3 = new javax.swing.JPanel();
         titlePanel = new JPanel();
+        
+        cardPanel = new javax.swing.JPanel();
+        jTabbedPane = new javax.swing.JTabbedPane();
+        searchPane = new javax.swing.JPanel();
+        ProjectPane = new javax.swing.JPanel();
+        UserProfilesPane = new javax.swing.JPanel();
+        
+       
+        lblExistingUsers = new javax.swing.JLabel();
+        lblExistingProjects = new javax.swing.JLabel(); 
+        lblWelcome = new javax.swing.JLabel();
+       
+        
+       
+        
+        
         
         ImagePanel panel = new ImagePanel(new ImageIcon("FIL.jpg").getImage());
         
@@ -343,119 +362,167 @@ public class AdminHomePageGUI extends javax.swing.JFrame {
 
         jTabbedPane.addTab("Search", searchPane);
 
-        lblExistingTeams.setText("Existing Teams");
-
-        javax.swing.GroupLayout teamTablePanelLayout = new javax.swing.GroupLayout(teamTablePanel);
-        teamTablePanel.setLayout(teamTablePanelLayout);
-        teamTablePanelLayout.setHorizontalGroup(
-            teamTablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 353, Short.MAX_VALUE)
+        javax.swing.GroupLayout ProjectTablePanelLayout = new javax.swing.GroupLayout(ProjectTablePanel);
+        ProjectTablePanel.setLayout(ProjectTablePanelLayout);
+        ProjectTablePanelLayout.setHorizontalGroup(
+            ProjectTablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 438, Short.MAX_VALUE)
         );
-        teamTablePanelLayout.setVerticalGroup(
-            teamTablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        ProjectTablePanelLayout.setVerticalGroup(
+            ProjectTablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 159, Short.MAX_VALUE)
         );
 
-        AdminTeamPanel.setMaximumSize(new java.awt.Dimension(600, 250));
+        ProjectRequestPanel.setMaximumSize(new java.awt.Dimension(600, 250));
 
-        javax.swing.GroupLayout AdminTeamPanelLayout = new javax.swing.GroupLayout(AdminTeamPanel);
-        AdminTeamPanel.setLayout(AdminTeamPanelLayout);
-        AdminTeamPanelLayout.setHorizontalGroup(
-            AdminTeamPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 599, Short.MAX_VALUE)
+        javax.swing.GroupLayout ProjectRequestPanelLayout = new javax.swing.GroupLayout(ProjectRequestPanel);
+        ProjectRequestPanel.setLayout(ProjectRequestPanelLayout);
+        ProjectRequestPanelLayout.setHorizontalGroup(
+            ProjectRequestPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 605, Short.MAX_VALUE)
         );
-        AdminTeamPanelLayout.setVerticalGroup(
-            AdminTeamPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 118, Short.MAX_VALUE)
+        ProjectRequestPanelLayout.setVerticalGroup(
+            ProjectRequestPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 143, Short.MAX_VALUE)
         );
 
-        btnAdminAddTeam.setText("Add Team");
-        btnAdminAddTeam.addActionListener(new java.awt.event.ActionListener() {
+        btnAcceptRequest.setText("Accept Request");
+        btnAcceptRequest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAdminAddTeamActionPerformed(evt);
+                btnAcceptRequestActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout teamPaneLayout = new javax.swing.GroupLayout(teamPane);
-        teamPane.setLayout(teamPaneLayout);
-        teamPaneLayout.setHorizontalGroup(
-            teamPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(teamPaneLayout.createSequentialGroup()
-                .addGroup(teamPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(teamPaneLayout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(AdminTeamPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnAdminAddTeam))
-                    .addGroup(teamPaneLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblExistingTeams))
-                    .addGroup(teamPaneLayout.createSequentialGroup()
-                        .addGap(126, 126, 126)
-                        .addComponent(teamTablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(120, Short.MAX_VALUE))
-        );
-        teamPaneLayout.setVerticalGroup(
-            teamPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(teamPaneLayout.createSequentialGroup()
-                .addGroup(teamPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(teamPaneLayout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(btnAdminAddTeam))
-                    .addGroup(teamPaneLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(AdminTeamPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(lblExistingTeams)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(teamTablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(140, Short.MAX_VALUE))
-        );
-
-        jTabbedPane.addTab("Team", teamPane);
-
-        javax.swing.GroupLayout addMemberPanelLayout = new javax.swing.GroupLayout(addMemberPanel);
-        addMemberPanel.setLayout(addMemberPanelLayout);
-        addMemberPanelLayout.setHorizontalGroup(
-            addMemberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 615, Short.MAX_VALUE)
-        );
-        addMemberPanelLayout.setVerticalGroup(
-            addMemberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 183, Short.MAX_VALUE)
-        );
-
-        btnAdminAddMember.setText("Add Member");
-        btnAdminAddMember.addActionListener(new java.awt.event.ActionListener() {
+        btnManageProjects.setText("Manage Projects");
+        btnManageProjects.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAdminAddMemberActionPerformed(evt);
+                btnManageProjectsActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout memberPaneLayout = new javax.swing.GroupLayout(memberPane);
-        memberPane.setLayout(memberPaneLayout);
-        memberPaneLayout.setHorizontalGroup(
-            memberPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(memberPaneLayout.createSequentialGroup()
-                .addGap(65, 65, 65)
-                .addComponent(addMemberPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(160, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, memberPaneLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnAdminAddMember)
-                .addGap(130, 130, 130))
+        lblExistingProjects.setText("Existing Projects");
+
+        javax.swing.GroupLayout ProjectPaneLayout = new javax.swing.GroupLayout(ProjectPane);
+        ProjectPane.setLayout(ProjectPaneLayout);
+        ProjectPaneLayout.setHorizontalGroup(
+            ProjectPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ProjectPaneLayout.createSequentialGroup()
+                .addGap(53, 53, 53)
+                .addComponent(ProjectRequestPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ProjectPaneLayout.createSequentialGroup()
+                .addGroup(ProjectPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(ProjectPaneLayout.createSequentialGroup()
+                        .addContainerGap(75, Short.MAX_VALUE)
+                        .addComponent(ProjectTablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(75, 75, 75)
+                        .addComponent(btnManageProjects))
+                    .addGroup(ProjectPaneLayout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(lblExistingProjects)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAcceptRequest)))
+                .addGap(445, 445, 445))
         );
-        memberPaneLayout.setVerticalGroup(
-            memberPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(memberPaneLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(btnAdminAddMember)
+        ProjectPaneLayout.setVerticalGroup(
+            ProjectPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ProjectPaneLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addComponent(addMemberPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(219, Short.MAX_VALUE))
+                .addComponent(ProjectRequestPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(ProjectPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(ProjectPaneLayout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addGroup(ProjectPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblExistingProjects)
+                            .addComponent(btnAcceptRequest))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                        .addComponent(ProjectTablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(51, 51, 51))
+                    .addGroup(ProjectPaneLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnManageProjects)
+                        .addGap(59, 59, 59))))
         );
 
-        jTabbedPane.addTab("Member", memberPane);
+        jTabbedPane.addTab("Project Dashboard", ProjectPane);
+        
+        javax.swing.GroupLayout UserRequestPanelLayout = new javax.swing.GroupLayout(UserRequestPanel);
+        UserRequestPanel.setLayout(UserRequestPanelLayout);
+        UserRequestPanelLayout.setHorizontalGroup(
+            UserRequestPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 582, Short.MAX_VALUE)
+        );
+        UserRequestPanelLayout.setVerticalGroup(
+            UserRequestPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 147, Short.MAX_VALUE)
+        );
+
+        btnUserAcceptRequest.setText("Accept Request");
+        btnUserAcceptRequest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUserAcceptRequestActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout UserTablePanelLayout = new javax.swing.GroupLayout(UserTablePanel);
+        UserTablePanel.setLayout(UserTablePanelLayout);
+        UserTablePanelLayout.setHorizontalGroup(
+            UserTablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 395, Short.MAX_VALUE)
+        );
+        UserTablePanelLayout.setVerticalGroup(
+            UserTablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 177, Short.MAX_VALUE)
+        );
+
+        btnManageUsers.setText("Manage Users");
+        btnManageUsers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnManageUsersActionPerformed(evt);
+            }
+        });
+
+        lblExistingUsers.setText("Existing Users");
+
+        javax.swing.GroupLayout UserProfilesPaneLayout = new javax.swing.GroupLayout(UserProfilesPane);
+        UserProfilesPane.setLayout(UserProfilesPaneLayout);
+        UserProfilesPaneLayout.setHorizontalGroup(
+            UserProfilesPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(UserProfilesPaneLayout.createSequentialGroup()
+                .addGap(56, 56, 56)
+                .addComponent(UserRequestPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(UserProfilesPaneLayout.createSequentialGroup()
+                .addGroup(UserProfilesPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(UserProfilesPaneLayout.createSequentialGroup()
+                        .addGap(56, 56, 56)
+                        .addComponent(UserTablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(UserProfilesPaneLayout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(lblExistingUsers)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
+                .addGroup(UserProfilesPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnUserAcceptRequest, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnManageUsers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(446, 446, 446))
+        );
+        UserProfilesPaneLayout.setVerticalGroup(
+            UserProfilesPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(UserProfilesPaneLayout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(UserRequestPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(UserProfilesPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblExistingUsers)
+                    .addComponent(btnUserAcceptRequest))
+                .addGap(15, 15, 15)
+                .addGroup(UserProfilesPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(UserTablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnManageUsers))
+                .addContainerGap(57, Short.MAX_VALUE))
+        );
+
+        jTabbedPane.addTab("User Profiles", UserProfilesPane);
 
         lblWelcome.setText("Hi,Welcome");
 
@@ -534,33 +601,40 @@ public class AdminHomePageGUI extends javax.swing.JFrame {
     private void btn1SearchActionPerformed(java.awt.event.ActionEvent evt) {                                           
         // TODO add your handling code here:
     	String projectName = txtProjectName.getText();
-    	projectTableController.readProjectbyUser(projectName);
-    	jTable2 = new JTable(projectTableController.getTableModel());
-     	jScrollPane2 = new JScrollPane(jTable2);
-     	jScrollPane2.setPreferredSize(new Dimension(600, 200));
-        jScrollPane2.setViewportView(jTable2);
-    	System.out.println("Search action performed");
-    	projectSearchPanel.setLayout(new BorderLayout());
-    	projectSearchPanel.add(jScrollPane2, BorderLayout.CENTER);
-    	txtProjectName.setText("");
-    	projectSearchPanel.revalidate();
-    	projectSearchPanel.repaint();
+		 if (projectName.equals("")) {
+			 JOptionPane.showMessageDialog(null, "Please enter the project name.");
+			 return;
+		 }
+		 projectUserController.readProjectbyUser(projectName);
+		 jTable2 = new JTable(projectUserController.getTableModel());
+		 jScrollPane2 = new JScrollPane(jTable2);
+		 jScrollPane2.setPreferredSize(new Dimension(600, 200));
+		 jScrollPane2.setViewportView(jTable2);
+		 projectSearchPanel.setLayout(new BorderLayout());
+		 projectSearchPanel.add(jScrollPane2, BorderLayout.CENTER);
+		 txtProjectName.setText("");
+		 projectSearchPanel.revalidate();
+		 projectSearchPanel.repaint();
     } 
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {                                              
         // TODO add your handling code here:
     	String userName = txtParticipantName.getText();
-    	taskInfoController.readTaskbyUser(userName);
-    	jTable1 = new JTable(taskInfoController.getTableModel());
-    	jScrollPane1 = new JScrollPane(jTable1);
-    	jScrollPane1.setPreferredSize(new Dimension(600, 200));
-    	jScrollPane1.setViewportView(jTable1);
-    	teamSearchPanel.setLayout(new BorderLayout());
-    	teamSearchPanel.add(jScrollPane1, BorderLayout.CENTER);
-    	txtParticipantName.setText("");
-    	teamSearchPanel.revalidate();
-    	teamSearchPanel.repaint();
-    	
+    	 if (userName.equals("")) {
+			 JOptionPane.showMessageDialog(null, "Please enter the user name.");
+			 return;
+		 }
+		 
+		 taskInfoController.readTaskbyUser(userName);
+		 jTable1 = new JTable(taskInfoController.getTableModel());
+		 jScrollPane1 = new JScrollPane(jTable1);
+		 jScrollPane1.setPreferredSize(new Dimension(600, 200));
+		 jScrollPane1.setViewportView(jTable1);
+		 teamSearchPanel.setLayout(new BorderLayout());
+		 teamSearchPanel.add(jScrollPane1, BorderLayout.CENTER);
+		 txtParticipantName.setText("");
+		 teamSearchPanel.revalidate();
+		 teamSearchPanel.repaint();
     	
     } 
     
@@ -569,38 +643,59 @@ public class AdminHomePageGUI extends javax.swing.JFrame {
     }  
     
     
-    private void btnAdminAddMemberActionPerformed(java.awt.event.ActionEvent evt) {                                                  
+    private void btnUserAcceptRequestActionPerformed(java.awt.event.ActionEvent evt) {                                                  
         // TODO add your handling code here:
-    	int selectedrow = jTable4.getSelectedRow();
-    	
-    	TableModel tm= jTable4.getModel();
-    	String[] name = new String[jTable4.getColumnCount()];
-    	name[0] = (String) tm.getValueAt(selectedrow, 0);
-    	name[1] = (String) tm.getValueAt(selectedrow, 1);
-    	name[2] = (String) tm.getValueAt(selectedrow, 2);
-    	
-    	 tempAddMemberController.addMemberRow(name, selectedrow);
+    	 int selectedrow = jTable4.getSelectedRow();
+		 if (selectedrow == -1) {
+			 /* None selected. Do nothing. */
+			 JOptionPane.showMessageDialog(null, "No row selected");
+			 return;
+		 }
+		 TableModel tm= jTable4.getModel();
+		 String[] name = new String[jTable4.getColumnCount()];
+		 name[0] = (String) tm.getValueAt(selectedrow, 0);
+		 name[1] = (String) tm.getValueAt(selectedrow, 1);
+		 name[2] = (String) tm.getValueAt(selectedrow, 2);
+
+		 tempAddMemberController.addMemberRow(name, selectedrow);
     	
     }                                                 
 
-    private void btnAdminAddTeamActionPerformed(java.awt.event.ActionEvent evt) {                                                
+    private void btnAcceptRequestActionPerformed(java.awt.event.ActionEvent evt) {                                                
         // TODO add your handling code here:
-    	int selectedrow = jTable5.getSelectedRow();
-    	
-    	TableModel tm= jTable5.getModel();
-    	String[] name = new String[jTable5.getColumnCount()];
-    	int rowIndex = jTable5.getSelectedRow();
-    	name[0] = (String) tm.getValueAt(selectedrow, 0);
-    	name[1] = (String) tm.getValueAt(selectedrow, 1);
-    	name[2] = (String) tm.getValueAt(selectedrow, 2);
-    	name[3] = (String) tm.getValueAt(selectedrow, 3);
-    	name[4] = (String) tm.getValueAt(selectedrow, 4);
-    	
-    	 tempAddTeamController.addTeamRow(rowIndex, name);
-    }    
+    	ProjectInfo projectInfo;
+		 int selectedrow = jTable5.getSelectedRow();
+		 if (selectedrow == -1) {
+			 /* None selected. Do nothing. */
+			 JOptionPane.showMessageDialog(null, "No row selected");
+			 return;
+		 }
+		 TableModel tm= jTable5.getModel();
+		 String[] name = new String[jTable5.getColumnCount()];
+		 name[0] = (String) tm.getValueAt(selectedrow, 0);
+		 name[1] = (String) tm.getValueAt(selectedrow, 1);
+		 name[2] = (String) tm.getValueAt(selectedrow, 2);
+		 name[3] = (String) tm.getValueAt(selectedrow, 3);
+		 name[4] = (String) tm.getValueAt(selectedrow, 4);
+
+		 if ((projectInfo = tempAddProjectController.addTeamRow(selectedrow, name)) == null) {
+			 /* Alert message saying not able to add. */
+			 JOptionPane.showMessageDialog(null, "Team add failed.");
+		 }
+		 
+		 /* Update the Existing team with the record. */
+		 projectInfoController2.addProjectRow(projectInfo);
+    }   
+    
+    private void btnManageProjectsActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    	new ProjectInfoGUI().setVisible(true);
+    } 
     
     
-    
+    private void btnManageUsersActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        // TODO add your handling code here:
+    } 
  
     
     
@@ -623,13 +718,13 @@ public class AdminHomePageGUI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdminHomePageGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdminHomePageGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdminHomePageGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdminHomePageGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -644,21 +739,27 @@ public class AdminHomePageGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify                     
     private javax.swing.JButton btnLogout;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JRadioButton projectSearchButton;
+    private javax.swing.JRadioButton teamSearchButton;
     private javax.swing.JPanel cardPanel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel memberPane;
+    private javax.swing.JPanel UserProfilesPane;
     private javax.swing.JTabbedPane jTabbedPane;
-    private javax.swing.JLabel lblExistingTeams;
+    private javax.swing.JLabel lblExistingProjects;
+    private javax.swing.JLabel lblExistingUsers;
     private javax.swing.JLabel lblWelcome;
-    private javax.swing.JRadioButton projectSearchButton;
+   
     private javax.swing.JPanel searchPane;
-    private javax.swing.JPanel teamPane;
-    private javax.swing.JRadioButton teamSearchButton;
-    private javax.swing.JPanel teamTablePanel;
-    private javax.swing.JPanel addMemberPanel;
-    private javax.swing.JButton btnAdminAddMember;
-    private javax.swing.JButton btnAdminAddTeam;
+    private javax.swing.JPanel ProjectPane;
+   
+    private javax.swing.JPanel ProjectTablePanel;
+    private javax.swing.JPanel UserRequestPanel;
+    private javax.swing.JPanel UserTablePanel;
+    private javax.swing.JButton btnUserAcceptRequest;
+    private javax.swing.JButton btnAcceptRequest;
+    private javax.swing.JButton btnManageProjects;
+    private javax.swing.JButton btnManageUsers;
     
     
     

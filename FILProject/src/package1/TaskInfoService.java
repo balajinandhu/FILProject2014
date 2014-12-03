@@ -13,20 +13,15 @@ public class TaskInfoService {
 
 	@SuppressWarnings("unchecked")
 	public List<TaskUser> readTaskbyUser(String userName) {
-		//UserRecord rec = manager.find(UserRecord.class, 29);
-		//System.out.print(rec);
+	
 		List<TaskUser> result = manager.createQuery("SELECT NEW package1.TaskUser("
-				+ "p.project_name, t.outcome)"
+				+ "p.project_name, t.task_name)"
 				+ " FROM TaskInfo t JOIN "
 				+ "ProjectInfo p WHERE t.project_ID = p.project_ID"
-				+ " AND t.user_name = (SELECT e.user_name from UserRecord e"
-				+ " WHERE e.user_name = ?1)", TaskUser.class)
+				+ " AND t.user_name = ?1", TaskUser.class)
 				.setParameter(1, userName)
 				.getResultList();
 		
-		for(TaskUser t : result) {
-			System.out.println(t.toString());
-		}
 		return result; 
 	}
 

@@ -16,9 +16,11 @@
 
 <class> package1.TaskInfo </class>
 
-<class> package1.TempAddMember </class>
+<class> package1.TempAddUser </class>
 
-<class> package1.TempAddTeam </class>
+<class> package1.TempAddProject </class>
+
+<class> package1.Budget </class>
 
 <properties>
 

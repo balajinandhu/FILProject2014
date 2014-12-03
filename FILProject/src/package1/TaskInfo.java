@@ -14,25 +14,25 @@ import javax.persistence.Id;
 
 class TaskUser {
 	private String project_name;
-	private String outcome;
+	private String task_name;
 	
-	public TaskUser(String project_name, String outcome) {
+	public TaskUser(String project_name, String task_name) {
 		this.project_name = project_name;
-		this.outcome = outcome;
+		this.task_name = task_name;
 	}
 	
 	public TaskUser() {
 		// TODO Auto-generated constructor stub
 		project_name = "";
-		outcome = "";
+		task_name = "";
 	}
 
 	String getProjectDescription() { return project_name; }
-	String getStatus() { return outcome; }
+	String getTask_name() { return task_name; }
 
 	@Override
 	public String toString() {
-		return "Project_Name =" + project_name + ", " + " Outcome =" + outcome ;
+		return "Project_Name =" + project_name + ", " + " Task_name =" + task_name ;
 	}
 	
 	public String getColumnName(int i) throws Exception {
@@ -41,9 +41,9 @@ class TaskUser {
 		if(i == 0)
 			colName = "Project Name";
 		else if(i== 1)
-			colName = "Outcome";
+			colName = "Task_name";
 		else
-			throw new Exception("Access to invalid column number in courselist table");
+			throw new Exception("Access to invalid column number in TaskUser table");
 
 		return colName;
 	}
@@ -52,9 +52,9 @@ class TaskUser {
 			if (i == 0) 
 				return project_name;
 			else if (i ==1)
-				return outcome;			
+				return task_name;			
 			else
-				throw new Exception("Error: invalid column index in courselist table"); 
+				throw new Exception("Error: invalid column index in TaskUser table"); 
 		}
 	
 	public int getNumberOfColumns() {
@@ -72,6 +72,9 @@ public class TaskInfo implements Serializable {
 
 	@Column
 	private int project_ID;
+	
+	@Column
+	private String task_name;
 
 	@Column
 	private Date start_date;
@@ -118,12 +121,12 @@ public class TaskInfo implements Serializable {
 		this.end_date = date;
 	}
 
-	public String getOutcome() {
-		return outcome;
+	public String getTask_name() {
+		return task_name;
 	}
 	
-	public void setOutcome(String outcome) {
-		this.outcome = outcome;
+	public void setOutcome(String taskname) {
+		this.task_name = taskname;
 	}
 	
 	public String getUser_name() {
@@ -157,7 +160,7 @@ public class TaskInfo implements Serializable {
 		else if(i == 3)
 			return getEndDate();
 		else if(i == 4)
-			return getOutcome();
+			return getTask_name();
 		else if(i == 5)
 			return getUser_name();
 		else if(i == 6)
@@ -180,7 +183,7 @@ public class TaskInfo implements Serializable {
 		else if (i == 3) // 3
 			colName = "End Date";
 		else if (i == 4) // 4
-			colName = "Outcome";
+			colName = "Task name";
 		else if(i == 5)
 			colName = "User name";
 		else if(i == 6)
@@ -204,7 +207,7 @@ public class TaskInfo implements Serializable {
 		else if (i == 3)
 			end_date = (Date) value;
 		else if (i == 4)
-			outcome = (String) value;
+			task_name = (String) value;
 		else if(i == 5)
 			user_name = (String) value;
 		else if(i == 6)
@@ -217,10 +220,14 @@ public class TaskInfo implements Serializable {
 
 	@Override
 	public String toString() {
-		return "TaskInfo [Task_ID =" + task_ID + ", " + " Project_ID =" + project_ID + "," + " Start_date =" + start_date +
-				" End_date =" + end_date + ","+"User_name =" + user_name+","+"Outcome =" + outcome + "," + " Project_metric_ID =" 
-				+ project_metric_ID + "," + " Project_Metric_Value =" + project_metric_value +"]";
+		return "TaskInfo [Task_ID =" + task_ID + ", " + " Project_ID =" + project_ID + ","
+				+ " Start_date =" + start_date + " End_date =" + end_date + ","+ 
+				"User_name =" + user_name+","+"Task_name =" + task_name + "," +
+				" Project_metric_ID =" + project_metric_ID + "," + " Project_Metric_Value ="
+				+ project_metric_value +"]";
 	}
+	
+	
 }
 
 

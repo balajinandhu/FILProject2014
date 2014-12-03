@@ -18,16 +18,16 @@ public class ProjectUserModel  extends AbstractTableModel {
 	private static final String PERSISTENCE_UNIT_NAME = "PersistenceUnit"; // Used in persistence.xml
 	private static EntityManagerFactory factory; // JPA 
 	private EntityManager manager; // JPA 
-	private ProjectInfo table;// represents the entity courselist
+	private ProjectUser table;// represents the entity courselist
 	// This field contains additional information about the results 
-	private ProjectInfoService projectTableService;
+	private ProjectUserService projectInfoService;
 	private int numcols, numrows; // number of rows and columns
 	public ProjectUserModel() {
 		// TODO Auto-generated constructor stub
 		factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 		manager = factory.createEntityManager();
-		table = new ProjectInfo();
-		projectTableService = new ProjectInfoService(manager);
+		table = new ProjectUser();
+		projectInfoService = new ProjectUserService(manager);
 	}
 
 	// returns a count of the number of rows16
@@ -89,14 +89,14 @@ public class ProjectUserModel  extends AbstractTableModel {
 	public ProjectUserModel(List<ProjectUser> list, EntityManager em) {
 		projectUserResultList = list;
 		numrows = projectUserResultList.size();
-		table = new ProjectInfo();
+		table = new ProjectUser();
 		numcols = table.getNumberOfColumns(); 
 		manager = em; 
-		projectTableService = new ProjectInfoService(manager);
+		projectInfoService = new ProjectUserService(manager);
 	}
 
 	public List<ProjectUser> readProjectbyUser(String projectName) {
-		projectUserResultList = projectTableService.readProjectbyUser(projectName);
+		projectUserResultList = projectInfoService.readProjectbyUser(projectName);
 		numrows = projectUserResultList.size();
 		numcols = table.getNumberOfColumns();
 		return projectUserResultList;

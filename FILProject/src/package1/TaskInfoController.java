@@ -14,7 +14,6 @@ import javax.swing.table.TableModel;
 
 
 public class TaskInfoController implements TableModelListener {
-	private TaskInfoModel tableModel;
 	private TaskUserModel tableModel1;
 	//private HomePageGUI gui;
 	private AdminHomePageGUI gui;

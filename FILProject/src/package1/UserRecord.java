@@ -20,14 +20,15 @@ public class UserRecord implements Serializable {
 	@Column
 	private String role;
 
-	@Column
-	private String team_name;
 
 	@Column
 	private String email_ID;
 
 	@Column
 	private int phone_number;
+	
+	@Column
+	private int project_ID;
 
 	@ManyToMany(mappedBy="userrecord")
 	private Set<ProjectInfo> records;
@@ -36,16 +37,6 @@ public class UserRecord implements Serializable {
 	}
 
 
-	@ManyToOne(cascade=CascadeType.ALL)
-	@PrimaryKeyJoinColumn(name="team_name")
-	private TeamInfo teaminfo;	
-	public void setTeamInfo(TeamInfo teamInfo) {
-		teaminfo = teamInfo;
-	}
-	public TeamInfo getTeamInfo() {
-		return teaminfo;
-	}
-	
 	public String getUser_name() {
 		return user_name;
 	}
@@ -66,13 +57,7 @@ public class UserRecord implements Serializable {
 	public void setRole(String role) {
 		this.role = role;
 	}
-	public String getTeam_name() {
-		return team_name;
-	}
-	public void setTeam_name(String teamname) {
-		this.team_name = teamname;
-	}
-
+	
 	public String getEmail_ID() {
 		return email_ID;
 	}
@@ -87,6 +72,12 @@ public class UserRecord implements Serializable {
 		this.phone_number = num;
 	}
 
+	public int getProject_ID() {
+		return project_ID;
+	}
+	public void setProjectID(int id) {
+		this.project_ID = id;
+	}
 
 	// return number of columns in the table
 	public int getNumberOfColumns() {
@@ -101,12 +92,12 @@ public class UserRecord implements Serializable {
 			return getPassword();
 		else if (i == 2)
 			return getRole();
-		else if(i == 3)
-			return getTeam_name();
-		else if(i == 4)	 
+		else if(i == 3)	 
 			return getEmail_ID();
-		else if(i == 5)
+		else if(i == 4)
 			return getPhone_number();
+		else if(i == 5)
+			return getProject_ID();
 		else
 			throw new Exception("Error: invalid column index in userrecord table"); 
 	}
@@ -120,12 +111,12 @@ public class UserRecord implements Serializable {
 			colName = "Password";
 		else if (i == 2)
 			colName = "Role";
-		else if (i == 3)
-			colName = "Team_name";
-		else if(i == 4)
+		else if(i == 3)
 			colName = "Email_ID";
-		else if(i == 5)
+		else if(i == 4)
 			colName = "Phone_number";
+		else if(i == 5)
+			colName = "Project_ID";
 		else
 			throw new Exception("Access to invalid column number in userrecord table");
 
@@ -141,11 +132,11 @@ public class UserRecord implements Serializable {
 		else if (i == 2)
 			role = (String) value;
 		else if(i == 3)
-			team_name = (String) value;
-		else if(i == 4)
 			email_ID = (String) value;
+		else if (i == 4)
+			phone_number = (int) value;
 		else if (i == 5)
-			password = (String) value;
+			project_ID = (int) value;
 		else
 			throw new Exception("Error: invalid column index in userrecord table"); 
 	}
@@ -153,8 +144,8 @@ public class UserRecord implements Serializable {
 	@Override
 	public String toString() {
 		return "UserRecord [ User_name =" + user_name + "," + " Password =" + password +
-				","+"Role =" + role +","+"Team_name =" + team_name + ","+
-				" Email_ID =" + email_ID + "," + " Phone_number =" + phone_number +"]";
+				","+"Role =" + role +","+
+				" Email_ID =" + email_ID + "," + " Phone_number =" + phone_number + " Project_ID =" + project_ID  +"]";
 	}
 }
 
