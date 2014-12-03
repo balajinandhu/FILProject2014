@@ -11,3 +11,7 @@ git commit -m "" :
 git push
 
 git pull origin master : Pull requests let you tell others about changes you've pushed to a repository on GitHub.
+
+git checkout -b branch_name : creates the branch then checks it out so you can immediately start working on it
+git merge branch_name : to merge in a branch in the same repo
+git-mergetool : call GUI tool to merge files like kdiff3, tkdiff, meld, xxdiff, emerge, vimdiff, gvimdiff, ecmerge, and opendiff
