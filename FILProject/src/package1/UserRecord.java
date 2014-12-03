@@ -30,12 +30,12 @@ public class UserRecord implements Serializable {
 	@Column
 	private int project_ID;
 
-	@ManyToMany(mappedBy="userrecord")
+/*	@ManyToMany(mappedBy="userrecord")
 	private Set<ProjectInfo> records;
 	public Set<ProjectInfo> getRecords() {
 		return records;
 	}
-
+*/
 
 	public String getUser_name() {
 		return user_name;
@@ -81,21 +81,21 @@ public class UserRecord implements Serializable {
 
 	// return number of columns in the table
 	public int getNumberOfColumns() {
-		return 6; 
+		return 3; 
 	}
 
 	// return the data in column i
 	public Object getColumnData(int i) throws Exception {
 		if (i == 0)
 			return getUser_name();
-		else if (i == 1) 
-			return getPassword();
-		else if (i == 2)
-			return getRole();
-		else if(i == 3)	 
+		else if(i == 1)	 
 			return getEmail_ID();
-		else if(i == 4)
+		else if (i == 2)
 			return getPhone_number();
+		else if (i == 3)
+			return getRole();
+		else if (i == 4) 
+			return getPassword();
 		else if(i == 5)
 			return getProject_ID();
 		else
@@ -108,13 +108,13 @@ public class UserRecord implements Serializable {
 		if (i == 0) 
 			colName = "User_name";
 		else if (i == 1)
-			colName = "Password";
+			colName =  "Email_ID";
 		else if (i == 2)
-			colName = "Role";
-		else if(i == 3)
-			colName = "Email_ID";
-		else if(i == 4)
 			colName = "Phone_number";
+		else if(i == 3)
+			colName ="Role";
+		else if(i == 4)
+			colName = "Password";
 		else if(i == 5)
 			colName = "Project_ID";
 		else
@@ -128,13 +128,13 @@ public class UserRecord implements Serializable {
 		if (i == 0) 
 			user_name = (String) value;
 		else if (i == 1) 
-			password = (String) value;
-		else if (i == 2)
-			role = (String) value;
-		else if(i == 3)
 			email_ID = (String) value;
-		else if (i == 4)
+		else if (i == 2)
 			phone_number = (int) value;
+		else if(i == 3)
+			role = (String) value;
+		else if (i == 4)
+			password = (String) value;
 		else if (i == 5)
 			project_ID = (int) value;
 		else

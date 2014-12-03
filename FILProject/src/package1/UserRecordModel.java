@@ -56,6 +56,7 @@ public class UserRecordModel  extends AbstractTableModel {
 	public Object getValueAt(int row, int col) {
 		try {
 			//if (col < 2) 
+			System.out.println(userRecordResultList.get(row).getColumnData(col) + " " + numcols);
 			return  userRecordResultList.get(row).getColumnData(col);
 
 			//else
@@ -117,23 +118,14 @@ public class UserRecordModel  extends AbstractTableModel {
 		EntityTransaction userTransaction = manager.getTransaction(); 
 		userTransaction.begin();
 		UserRecord newRecord = null;
-		try {
-			newRecord = userRecordService.createProject(Integer.parseInt((String) array[0]), (String) array[1], 
-					(String) array[2], (String) array[3], (String) array[4], format.parse((String) array[5]),
-					format.parse((String) array[6]), Integer.parseInt((String) array[7]), (String) array[8]);
-		} catch (NumberFormatException | ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			newRecord = userRecordService.createRecord((String) array[0],(String) array[1], Integer.parseInt((String) array[2]));
+		
 		userTransaction.commit();
 		// set the current row to rowIndex
 		userRecordResultList.add(newRecord);
 		int row = userRecordResultList.size(); 
 		fireTableRowsInserted(row - 1, row - 1);
-
-
 		numrows++;
-
 	} 
 
 	public void deleteRow(Object[] array, int index) {
@@ -145,26 +137,16 @@ public class UserRecordModel  extends AbstractTableModel {
 		// set the current row to rowIndex
 		userRecordResultList.remove(index);
 		fireTableRowsDeleted(index, index);
-
 		numrows--;
 	}
+	
 	@SuppressWarnings("deprecation")
 	public void updateRow(Object[] array, int index) {
 		DateFormat format = new SimpleDateFormat("YYYY/MM/dd");
 		EntityTransaction userTransaction = manager.getTransaction(); 
 		userTransaction.begin();
 		UserRecord newRecord = null;
-		try {
-			newRecord = userRecordService.updateRecord(Integer.parseInt((String) array[0]), (String) array[1], 
-					(String) array[2], (String) array[3], (String) array[4], format.parse((String) array[5]),
-					format.parse((String) array[6]), Integer.parseInt((String) array[7]), (String) array[8]);
-		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
+			newRecord = userRecordService.updateRecord((String) array[0],(String) array[1], Integer.parseInt((String) array[2]));
 
 		userTransaction.commit();
 		// set the current row to rowIndex

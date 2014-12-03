@@ -48,7 +48,7 @@ public class ProjectInfoController implements ListSelectionListener,TableModelLi
 		gui.setEstimated_budgetTextField( 
 				tableModel.getValueAt(firstIndex, 7).toString());
 		gui.setOutcomeTextField( (String) 
-				tableModel.getValueAt(firstIndex, 8).toString()); 
+					tableModel.getValueAt(firstIndex, 8).toString()); 
 	}
 
 	public void tableChanged(TableModelEvent e)

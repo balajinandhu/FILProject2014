@@ -22,11 +22,11 @@ public class TempAddUserService {
 	public void createMember(String[] name) {
 		//manager.persist(team);
 		// return team;
-		TeamInfo team = null;
+		ProjectInfo team = null;
 		if (name[name.length - 1] != "") {
 			try {
 				team = manager.createQuery("SELECT t "
-						+ " FROM TeamInfo t WHERE t.team_name=?1", TeamInfo.class)
+						+ " FROM ProjectInfo t WHERE t.project_name=?1", ProjectInfo.class)
 						.setParameter(1, name[name.length - 1])
 						.getSingleResult();
 			} catch(NoResultException e) {
@@ -38,13 +38,15 @@ public class TempAddUserService {
 		UserRecord user = new UserRecord();
 		user.setUser_name(name[0]);
 		user.setRole(name[1]);
-		if (team != null) {
+		user.setProjectID(team.getProject_ID());
+		
+/*		if (team != null) {
 			user.setTeam_name(name[name.length - 1]);
 			int count = team.getTeam_strength();
 			count++;
 			team.setTeam_strength(count);
 			manager.merge(team);
-		}
+		} */
 		manager.persist(user);
 
 

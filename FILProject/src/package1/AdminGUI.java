@@ -24,7 +24,7 @@ import javax.swing.table.TableModel;
  *
  * @author vkarnati
  */
-public class AdminHomePageGUI extends javax.swing.JFrame {
+public class AdminGUI extends javax.swing.JFrame {
 
     private javax.swing.JPanel teamSearchPanel;
     private javax.swing.JPanel projectSearchPanel;
@@ -52,21 +52,11 @@ public class AdminHomePageGUI extends javax.swing.JFrame {
     /**
      * Creates new form AdminHomeGUI
      */
-    private JTable jtable3; // the table displayed on the GUI
-    private ProjectUserController projectUserController;
-    private TaskInfoController taskInfoController;
-    private TempAddUserController tempAddMemberController;
-    private ExistingProjectInfoController2 projectInfoController2;
-    private TempAddProjectController tempAddProjectController;
+   
     
-    public AdminHomePageGUI() {
+    public AdminGUI() {
         initComponents();
-        projectUserController = new ProjectUserController(this);
-        taskInfoController = new TaskInfoController(this);
-        tempAddMemberController = new TempAddUserController(this);
-        tempAddProjectController = new TempAddProjectController(this);
-        projectInfoController2 = new ExistingProjectInfoController2(this);
-        addJTable();
+ 
         
        
         btnViewBudget = new javax.swing.JButton();
@@ -76,9 +66,7 @@ public class AdminHomePageGUI extends javax.swing.JFrame {
         lblParticipantName = new javax.swing.JLabel();
       
         txtParticipantName = new javax.swing.JTextField();
-       // jScrollPane1 = new javax.swing.JScrollPane();
-    //    jTable1 = new javax.swing.JTable();
-     //   jScrollPane1.setViewportView(jTable1);
+       
         lblParticipantName.setText("Participant Name");
         javax.swing.GroupLayout teamSearchPanelLayout = new javax.swing.GroupLayout(teamSearchPanel);
         teamSearchPanel.setLayout(teamSearchPanelLayout);
@@ -132,9 +120,6 @@ public class AdminHomePageGUI extends javax.swing.JFrame {
         projectSearchPanel = new javax.swing.JPanel();
         lblProjectName = new javax.swing.JLabel();
         txtProjectName = new javax.swing.JTextField();
-    //    jScrollPane2 = new javax.swing.JScrollPane();
-     //   jTable2 = new javax.swing.JTable();
-        //jScrollPane2.setViewportView(jTable2);
         lblProjectName.setText("Project Name");
         
         btnSearch.setText("Search");
@@ -211,44 +196,7 @@ public class AdminHomePageGUI extends javax.swing.JFrame {
     }
 
     
-    public void addJTable() {
-    	// add the data and column names to a JTable
-    	//jtable1  = new JTable(courseListTableController.getData(), courseListTableController.getColumnNames());
-       
-        
-               
-    	// add a ListSelectionListener to the table
-    //	jtable3.getSelectionModel().addListSelectionListener(projectTableController);
-    	
-    	// add the table to a scrollpane
-    	jtable3 = new JTable(projectInfoController2.getTableModel());
-        JScrollPane scrollpane = new JScrollPane(jtable3);
-        scrollpane.setPreferredSize(new Dimension(600, 200));
-    	// create a window
-    	ProjectTablePanel.setLayout(new BorderLayout());
-    	ProjectTablePanel.add(scrollpane, BorderLayout.CENTER);
-    	
-    	
-    	jTable4 = new JTable(tempAddMemberController.getTableModel());
-    	// add a ListSelectionListener to the table
-    	jTable4.getSelectionModel().addListSelectionListener(tempAddMemberController);
-        jScrollPane4 = new JScrollPane(jTable4);
-        jScrollPane4.setPreferredSize(new Dimension(600, 200));
-    	// create a window
-    	UserRequestPanel.setLayout(new BorderLayout());
-    	UserRequestPanel.add(jScrollPane4, BorderLayout.CENTER);
-    	
-    	jTable5 = new JTable(tempAddProjectController.getTableModel());
-    	// add a ListSelectionListener to the table
-    	jTable5.getSelectionModel().addListSelectionListener(tempAddProjectController);
-        jScrollPane5 = new JScrollPane(jTable5);
-        jScrollPane5.setPreferredSize(new Dimension(600, 200));
-    	// create a window
-    	ProjectRequestPanel.setLayout(new BorderLayout());
-    	ProjectRequestPanel.add(jScrollPane5, BorderLayout.CENTER);
-    	
-
-    }
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -276,7 +224,6 @@ public class AdminHomePageGUI extends javax.swing.JFrame {
         
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-    //    jPanel3 = new javax.swing.JPanel();
         titlePanel = new JPanel();
         
         cardPanel = new javax.swing.JPanel();
@@ -605,8 +552,8 @@ public class AdminHomePageGUI extends javax.swing.JFrame {
 			 JOptionPane.showMessageDialog(null, "Please enter the project name.");
 			 return;
 		 }
-		 projectUserController.readProjectbyUser(projectName);
-		 jTable2 = new JTable(projectUserController.getTableModel());
+		
+		 jTable2 = new JTable(/* add ur contoller*/);
 		 jScrollPane2 = new JScrollPane(jTable2);
 		 jScrollPane2.setPreferredSize(new Dimension(600, 200));
 		 jScrollPane2.setViewportView(jTable2);
@@ -625,8 +572,8 @@ public class AdminHomePageGUI extends javax.swing.JFrame {
 			 return;
 		 }
 		 
-		 taskInfoController.readTaskbyUser(userName);
-		 jTable1 = new JTable(taskInfoController.getTableModel());
+		
+		 jTable1 = new JTable(/* add ur controller */);
 		 jScrollPane1 = new JScrollPane(jTable1);
 		 jScrollPane1.setPreferredSize(new Dimension(600, 200));
 		 jScrollPane1.setViewportView(jTable1);
@@ -651,13 +598,7 @@ public class AdminHomePageGUI extends javax.swing.JFrame {
 			 JOptionPane.showMessageDialog(null, "No row selected");
 			 return;
 		 }
-		 TableModel tm= jTable4.getModel();
-		 String[] name = new String[jTable4.getColumnCount()];
-		 name[0] = (String) tm.getValueAt(selectedrow, 0);
-		 name[1] = (String) tm.getValueAt(selectedrow, 1);
-		 name[2] = (String) tm.getValueAt(selectedrow, 2);
-
-		 tempAddMemberController.addMemberRow(name, selectedrow);
+		 
     	
     }                                                 
 
@@ -670,21 +611,9 @@ public class AdminHomePageGUI extends javax.swing.JFrame {
 			 JOptionPane.showMessageDialog(null, "No row selected");
 			 return;
 		 }
-		 TableModel tm= jTable5.getModel();
-		 String[] name = new String[jTable5.getColumnCount()];
-		 name[0] = (String) tm.getValueAt(selectedrow, 0);
-		 name[1] = (String) tm.getValueAt(selectedrow, 1);
-		 name[2] = (String) tm.getValueAt(selectedrow, 2);
-		 name[3] = (String) tm.getValueAt(selectedrow, 3);
-		 name[4] = (String) tm.getValueAt(selectedrow, 4);
-
-		 if ((projectInfo = tempAddProjectController.addTeamRow(selectedrow, name)) == null) {
-			 /* Alert message saying not able to add. */
-			 JOptionPane.showMessageDialog(null, "Team add failed.");
-		 }
 		 
-		 /* Update the Existing team with the record. */
-		 projectInfoController2.addProjectRow(projectInfo);
+
+		 
     }   
     
     private void btnManageProjectsActionPerformed(java.awt.event.ActionEvent evt) {
@@ -718,20 +647,20 @@ public class AdminHomePageGUI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdminHomePageGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdminHomePageGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdminHomePageGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdminHomePageGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdminHomePageGUI().setVisible(true);
+                new AdminGUI().setVisible(true);
             }
         });
     }
