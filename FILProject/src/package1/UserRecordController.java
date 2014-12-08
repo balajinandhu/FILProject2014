@@ -35,8 +35,11 @@ public class UserRecordController implements ListSelectionListener,TableModelLis
 				tableModel.getValueAt(firstIndex, 0));
 		gui.setEmail_IDTextField( (String) 
 				tableModel.getValueAt(firstIndex, 1));
-		gui.setPhone_numberTextField(
-				tableModel.getValueAt(firstIndex, 2).toString());
+		if (tableModel.getValueAt(firstIndex, 2) != null)
+			gui.setPhone_numberTextField(
+					tableModel.getValueAt(firstIndex, 2).toString());
+		else
+			gui.setPhone_numberTextField("");
 	}
 
 	public void tableChanged(TableModelEvent e)
@@ -58,8 +61,11 @@ public class UserRecordController implements ListSelectionListener,TableModelLis
 					tableModel.getValueAt(firstIndex, 0));
 			gui.setEmail_IDTextField( (String) 
 					tableModel.getValueAt(firstIndex, 1));
-			gui.setPhone_numberTextField((String)
-					tableModel.getValueAt(firstIndex, 2));
+			if (tableModel.getValueAt(firstIndex, 2) != null)
+				gui.setPhone_numberTextField(
+						tableModel.getValueAt(firstIndex, 2).toString());
+			else
+				gui.setPhone_numberTextField("");
 
 		} catch(Exception exp) {
 			exp.getMessage();

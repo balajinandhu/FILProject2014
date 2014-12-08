@@ -120,12 +120,18 @@ public class ProjectInfo implements Serializable {
 	public Set<UserRecord> getUserRecord() {
 		return userrecord;
 	}
+	public void setUserRecord(Set<UserRecord> userrecord) {
+		this.userrecord = userrecord;
+	}
+	
 	public int getProject_ID() {
 		return project_ID;
 	}
 	public void setProject_ID(int id) {
 		this.project_ID = id;
 	}
+	
+	
 	
 	public String getProject_name() {
 		return project_name;

@@ -7,6 +7,8 @@ import javax.persistence.Persistence;
 import javax.swing.table.*;
 import javax.persistence.*;
 
+import org.eclipse.persistence.queries.ReadAllQuery;
+
 import java.util.*;
 /**
  *
@@ -119,6 +121,14 @@ public class ExistingProjectInfoModel2  extends AbstractTableModel {
 		int row = projectTableResultList.size(); 
 		fireTableRowsInserted(row - 1, row - 1);
 		numrows++;
+	}
+	
+	public void updateProjectTable() {
+		projectTableResultList = teamTableService.readAll();
+		fireTableDataChanged();
+		
+	//	model.fireTableCellUpdated(row, column);  
+	//	repaint(getCellRect(row, column, false)); 
 	}
 }
 

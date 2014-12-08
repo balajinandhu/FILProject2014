@@ -16,9 +16,9 @@ import javax.swing.table.TableModel;
 public class BudgetController {
 	private BudgetModel tableModel;
 	//private HomePageGUI gui;
-	private AdminHomePageGUI gui;
+	private BudgetGUI gui;
 	int firstIndex;
-	public BudgetController(AdminHomePageGUI gui) {
+	public BudgetController(BudgetGUI gui) {
 		this.gui = gui; 
 		// create the tableModel using the data in the cachedRowSet
 		tableModel = new BudgetModel();
@@ -29,5 +29,9 @@ public class BudgetController {
 	// new code
 	public TableModel getTableModel() {
 		return tableModel;
+	}
+	public void readBudget(String projectName) {
+		tableModel.readBudget(projectName);
+
 	}
 }

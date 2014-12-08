@@ -139,7 +139,7 @@ public class ProjectInfoModel  extends AbstractTableModel {
 	public void deleteRow(Object[] array, int index) {
 		EntityTransaction userTransaction = manager.getTransaction(); 
 		userTransaction.begin();
-		projectInfoService.deleteProject((String) array[0]);
+		projectInfoService.deleteProject(Integer.parseInt((String) array[0]));
 		// System.out.println(array[1]);
 		userTransaction.commit();
 		// set the current row to rowIndex
@@ -175,10 +175,10 @@ public class ProjectInfoModel  extends AbstractTableModel {
 
 	}
 	
-	public void addProjectRow(ProjectInfo projectInfo) {
+/*	public void addProjectRow(ProjectInfo projectInfo) {
 		projectInfoResultList.add(projectInfo);
 		int row = projectInfoResultList.size(); 
 		fireTableRowsInserted(row - 1, row - 1);
 		numrows++;
-	}
+	} */
 }

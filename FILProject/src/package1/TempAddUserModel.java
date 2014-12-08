@@ -106,4 +106,18 @@ public class TempAddUserModel extends AbstractTableModel {
 		numrows--;
 
 	}
+	
+	public void delMemberRow(String[] name, int selectedRow) {
+		//data[rowIndex][columnIndex] = (String) aValue;
+		// complete the code
+		EntityTransaction userTransaction = manager.getTransaction(); 
+		userTransaction.begin();
+		tempAddMemberService.delMember(name);
+		userTransaction.commit();
+		// set the current row to rowIndex
+		this.getList().remove(selectedRow);
+		fireTableRowsDeleted(selectedRow, selectedRow);			 
+		numrows--;
+
+	}
 }

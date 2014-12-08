@@ -29,8 +29,8 @@ public class ProjectInfoService {
 	}
 
 	// method to read a record
-	public ProjectInfo readProject(String courseNumber) {
-		ProjectInfo project = manager.find(ProjectInfo.class, courseNumber);
+	public ProjectInfo readProject(int projectid) {
+		ProjectInfo project = manager.find(ProjectInfo.class, projectid);
 		return project; 
 	}
 	// method to read all records
@@ -63,9 +63,8 @@ public class ProjectInfoService {
 	}
 
 	// method to delete a record
-	public void deleteProject(String projectname) {
-		ProjectInfo project = manager.find(ProjectInfo.class, projectname);
-		System.out.println(project);
+	public void deleteProject(int projectid) {
+		ProjectInfo project = manager.find(ProjectInfo.class, projectid);
 		if (project != null) {
 			manager.remove(project);
 		}

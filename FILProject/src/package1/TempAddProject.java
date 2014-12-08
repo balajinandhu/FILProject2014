@@ -54,18 +54,30 @@ public class TempAddProject implements Serializable {
 	}
 
 	public String getparticipant1() {
+		if(participant1 == null) 
+			return "";
+		else 
 		return participant1;
 	}
 	
 	public String getparticipant2() {
+		if(participant2 == null) 
+			return "";
+		else 
 		return participant2;
 	}
 
 	public String getparticipant3() {
+		if(participant3 == null) 
+			return "";
+		else 
 		return participant3;
 	}
 
 	public String getparticipant4() {
+		if(participant4 == null) 
+			return "";
+		else 
 		return participant4;
 	}
 

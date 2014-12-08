@@ -13,43 +13,30 @@ public class TempAddUserService {
 		this.manager = manager;
 	}
 	public List<TempAddUser> readAllData() {
-		TypedQuery<TempAddUser> query = manager.createQuery("SELECT NEW package1.TempAddUser("
-				+ "e.user_name, e.role, e.project_name) FROM TempAddUser e", TempAddUser.class);
+		TypedQuery<TempAddUser> query = manager.createQuery("SELECT e FROM user_registration e", TempAddUser.class);
 		List<TempAddUser> result = query.getResultList();
 		return result; 
 	}
 
 	public void createMember(String[] name) {
-		//manager.persist(team);
-		// return team;
-		ProjectInfo team = null;
-		if (name[name.length - 1] != "") {
-			try {
-				team = manager.createQuery("SELECT t "
-						+ " FROM ProjectInfo t WHERE t.project_name=?1", ProjectInfo.class)
-						.setParameter(1, name[name.length - 1])
-						.getSingleResult();
-			} catch(NoResultException e) {
-				team = null;
-			}
-		}
-
 		/* Create user here. */
-		UserRecord user = new UserRecord();
-		user.setUser_name(name[0]);
-		user.setRole(name[1]);
-		user.setProjectID(team.getProject_ID());
-		
-/*		if (team != null) {
-			user.setTeam_name(name[name.length - 1]);
-			int count = team.getTeam_strength();
-			count++;
-			team.setTeam_strength(count);
-			manager.merge(team);
-		} */
+
+		TempAddUser upr = manager.find(TempAddUser.class, name[0]);
+		UserRecord user = new UserRecord(upr.getUser_name(), upr.getRole(),
+				upr.getFirst_name(), upr.getLast_name(), upr.getEmail_ID(), upr.getPassword(), 
+				upr.getPhoneNumber());
+
 		manager.persist(user);
+		upr = manager.merge(upr);
+		manager.remove(upr);
+	}
+	
+	public void delMember(String[] name) {
+		/* Create user here. */
 
-
+		TempAddUser upr = manager.find(TempAddUser.class, name[0]);
+		upr = manager.merge(upr);
+		manager.remove(upr);
 	}
 
 }

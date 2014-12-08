@@ -43,5 +43,9 @@ public class TempAddProjectController implements ListSelectionListener { //,Tabl
 	public ProjectInfo addTeamRow(int rowIndex, String[] name) {
 		return TempAddTeamModel.addTeamRow(rowIndex, name);
 	}
+	
+	public TempAddProject delTeamRow(int rowIndex, String[] name) {
+		return TempAddTeamModel.delTeamRow(rowIndex, name);
+	}
 
 }

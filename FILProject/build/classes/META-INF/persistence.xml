@@ -12,8 +12,6 @@
 
 <class> package1.UserRecord </class>
 
-<class> package1.TeamInfo </class>
-
 <class> package1.TaskInfo </class>
 
 <class> package1.TempAddUser </class>
@@ -21,6 +19,7 @@
 <class> package1.TempAddProject </class>
 
 <class> package1.Budget </class>
+
 
 <properties>
 

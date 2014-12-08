@@ -10,8 +10,8 @@ import java.util.Set;
 public class Budget implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
-	@Column(name = "budget_ID")
-	private int budget_ID;
+	@Column(name = "item_ID")
+	private int item_ID;
 
 	@Column
 	private int project_ID;
@@ -25,11 +25,11 @@ public class Budget implements Serializable {
 	@Column
 	private String actual_cost;
 
-	public int getBudget_ID() {
-		return budget_ID;
+	public int getItem_ID() {
+		return item_ID;
 	}
-	public void setBudget_ID(int budgetid) {
-		this.budget_ID = budgetid;
+	public void setItem_ID(int itemid) {
+		this.item_ID = itemid;
 	}
 
 	public int getProject_ID() {
@@ -65,14 +65,14 @@ public class Budget implements Serializable {
 	
 	// return number of columns in the table
 	public int getNumberOfColumns() {
-		return 5;
+		return 4;
 	}
 
 	// return the data in column i
 	public Object getColumnData(int i) throws Exception {
 
 		if (i == 0)
-			return getProject_ID();
+			return getItem_ID();
 		else if (i == 1)
 			return getItem_description();
 		else if (i == 2)
@@ -80,7 +80,7 @@ public class Budget implements Serializable {
 		else if (i == 3)
 			return getActual_cost();
 		else if (i == 4)
-			return getBudget_ID();
+			return getProject_ID();
 		else
 			throw new Exception("Error: invalid column index in teaminfo table"); 
 	}
@@ -88,16 +88,16 @@ public class Budget implements Serializable {
 	// return the name of column i
 	public String getColumnName(int i) throws Exception {
 		String colName = null;
-		if (i == 0)
-			colName = "Project ID";
+		 if (i == 0) 
+			colName = "Item ID";
 		else if (i == 1) 
 			colName = "Item Description";
 		else if (i == 2) 
 			colName = "Estimated Cost";
 		else if (i == 3) 
 			colName = "Actual Cost";
-		else if (i == 4) 
-			colName = "Budget ID";
+		else if (i == 4)
+			colName = "Project ID";
 		else
 			throw new Exception("Access to invalid column number in teaminfo table");
 
@@ -107,7 +107,7 @@ public class Budget implements Serializable {
 	// set data column i to value
 	public void setColumnData(int i, Object value) throws Exception {
 		if (i == 0) 
-			project_ID = (int) value;
+			item_ID = (int) value;
 		else if (i == 1) 
 			item_description = (String) value;
 		else if (i == 2) 
@@ -115,7 +115,7 @@ public class Budget implements Serializable {
 		else if (i == 3) 
 			actual_cost = (String) value;
 		else if (i == 4) 
-			budget_ID = (int) value;
+			project_ID = (int) value;
 		else
 			throw new Exception("Error: invalid column index in teaminfo table"); 
 	}
@@ -123,7 +123,7 @@ public class Budget implements Serializable {
 	@Override
 	public String toString() {
 		return "Budget [ Project_ID =" + project_ID  + ", " + " Item_Description =" + item_description +" Estimated_cost =" 
-				+ estimated_cost +" Actual_cost =" + actual_cost + " Budget_ID =" + budget_ID +"]";
+				+ estimated_cost +" Actual_cost =" + actual_cost + " Item_ID =" +item_ID +"]";
 	}
 }
 

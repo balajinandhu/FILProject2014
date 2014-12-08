@@ -1,3 +1,6 @@
+
+
+
 package package1;
 
 
@@ -13,10 +16,16 @@ public class UserRecord implements Serializable {
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	@Column(name = "user_name")
 	private String user_name;
+	
+	@Column
+	private String first_name;
+
+	@Column
+	private String last_name;
 
 	@Column
 	private String password;
-
+	
 	@Column
 	private String role;
 
@@ -27,21 +36,49 @@ public class UserRecord implements Serializable {
 	@Column
 	private int phone_number;
 	
-	@Column
-	private int project_ID;
-
-/*	@ManyToMany(mappedBy="userrecord")
+	@ManyToMany(mappedBy="userrecord")
 	private Set<ProjectInfo> records;
 	public Set<ProjectInfo> getRecords() {
 		return records;
 	}
-*/
+	public void setRecords(Set<ProjectInfo> records) {
+		this.records = records;
+	}
 
+	public UserRecord() {
+		user_name = role = email_ID = first_name = last_name = password = "";
+		 phone_number = 0;
+	}
+	
+	public UserRecord(String userName, String role, String firstName, String lastName,
+			String email_ID, String password, int phoneNumber ) {
+		user_name = userName;
+		this.role = role;
+		first_name = firstName;
+		last_name = lastName;
+		this.email_ID = email_ID;
+		this.password = password;
+		phone_number = phoneNumber;
+		
+	}
 	public String getUser_name() {
 		return user_name;
 	}
 	public void setUser_name(String name) {
 		this.user_name = name;
+	}
+	public String getFirst_name() {
+		return first_name;
+	}
+	public void setFirst_name(String first_name) {
+		this.first_name = first_name;
+	}
+	
+	public String getLast_name() {
+		return last_name;
+	}
+	public void setlast_name(String last_name) {
+		this.last_name = last_name;
 	}
 
 	public String getPassword() {
@@ -50,6 +87,7 @@ public class UserRecord implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
 
 	public String getRole() {
 		return role;
@@ -72,13 +110,6 @@ public class UserRecord implements Serializable {
 		this.phone_number = num;
 	}
 
-	public int getProject_ID() {
-		return project_ID;
-	}
-	public void setProjectID(int id) {
-		this.project_ID = id;
-	}
-
 	// return number of columns in the table
 	public int getNumberOfColumns() {
 		return 3; 
@@ -96,8 +127,10 @@ public class UserRecord implements Serializable {
 			return getRole();
 		else if (i == 4) 
 			return getPassword();
-		else if(i == 5)
-			return getProject_ID();
+		else if(i == 5) 
+			return getFirst_name();
+		else if(i==6)
+			return getLast_name();
 		else
 			throw new Exception("Error: invalid column index in userrecord table"); 
 	}
@@ -116,7 +149,9 @@ public class UserRecord implements Serializable {
 		else if(i == 4)
 			colName = "Password";
 		else if(i == 5)
-			colName = "Project_ID";
+			colName = "first name";
+		else if(i == 6)
+			colName = "last name";
 		else
 			throw new Exception("Access to invalid column number in userrecord table");
 
@@ -135,8 +170,10 @@ public class UserRecord implements Serializable {
 			role = (String) value;
 		else if (i == 4)
 			password = (String) value;
-		else if (i == 5)
-			project_ID = (int) value;
+		else if( i == 5)
+			first_name = (String) value;
+		else if(i == 6)
+			last_name = (String) value;
 		else
 			throw new Exception("Error: invalid column index in userrecord table"); 
 	}
@@ -145,7 +182,7 @@ public class UserRecord implements Serializable {
 	public String toString() {
 		return "UserRecord [ User_name =" + user_name + "," + " Password =" + password +
 				","+"Role =" + role +","+
-				" Email_ID =" + email_ID + "," + " Phone_number =" + phone_number + " Project_ID =" + project_ID  +"]";
+				" Email_ID =" + email_ID + "," + " Phone_number =" + phone_number + " ]";
 	}
 }
 

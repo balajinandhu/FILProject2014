@@ -55,12 +55,7 @@ public class UserRecordModel  extends AbstractTableModel {
 	// returns the data at the given row and column number
 	public Object getValueAt(int row, int col) {
 		try {
-			//if (col < 2) 
-			System.out.println(userRecordResultList.get(row).getColumnData(col) + " " + numcols);
 			return  userRecordResultList.get(row).getColumnData(col);
-
-			//else
-			//	return ListResult.usetInfoResultList.get(row).getColumnData(col);
 		} catch (Exception e) {
 			e.getMessage();
 			return null;
@@ -118,7 +113,8 @@ public class UserRecordModel  extends AbstractTableModel {
 		EntityTransaction userTransaction = manager.getTransaction(); 
 		userTransaction.begin();
 		UserRecord newRecord = null;
-			newRecord = userRecordService.createRecord((String) array[0],(String) array[1], Integer.parseInt((String) array[2]));
+			newRecord = userRecordService.createRecord((String) array[0],
+					(String) array[1], Integer.parseInt((String) array[2]));
 		
 		userTransaction.commit();
 		// set the current row to rowIndex
@@ -146,7 +142,8 @@ public class UserRecordModel  extends AbstractTableModel {
 		EntityTransaction userTransaction = manager.getTransaction(); 
 		userTransaction.begin();
 		UserRecord newRecord = null;
-			newRecord = userRecordService.updateRecord((String) array[0],(String) array[1], Integer.parseInt((String) array[2]));
+			newRecord = userRecordService.updateRecord((String) array[0],
+					(String) array[1], Integer.parseInt((String) array[2]));
 
 		userTransaction.commit();
 		// set the current row to rowIndex

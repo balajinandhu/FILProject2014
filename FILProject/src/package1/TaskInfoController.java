@@ -59,8 +59,12 @@ public class TaskInfoController implements TableModelListener {
 			exp.printStackTrace();
 		}
 	}
-	public void readTaskbyUser(String userName) {
-		tableModel1.readTaskbyUser(userName);
+	public TaskUser readTaskbyUser(String userName) {
+		if (tableModel1.readTaskbyUser(userName) == null) {
+			return null;
+		}
+		
+		return new TaskUser();
 
 	}
 

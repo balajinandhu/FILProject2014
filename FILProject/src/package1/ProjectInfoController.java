@@ -31,8 +31,11 @@ public class ProjectInfoController implements ListSelectionListener,TableModelLi
 		ListSelectionModel selectModel = (ListSelectionModel) e.getSource();
 		int firstIndex = selectModel.getMinSelectionIndex();
 		// read the data in each column using getValueAt and display it on corresponding textfield
-		gui.setProject_IDTextField(
-				tableModel.getValueAt(firstIndex, 0).toString());
+		if (tableModel.getValueAt(firstIndex, 0) != null)
+			gui.setProject_IDTextField(
+					tableModel.getValueAt(firstIndex, 0).toString());
+		else
+			gui.setProject_IDTextField("");
 		gui.setProject_nameTextField( (String) 
 				tableModel.getValueAt(firstIndex, 1));
 		gui.setProject_descriptionTextField( (String) 
@@ -45,10 +48,14 @@ public class ProjectInfoController implements ListSelectionListener,TableModelLi
 				tableModel.getValueAt(firstIndex, 5));
 		gui.setEndDateTextField( (String) 
 				tableModel.getValueAt(firstIndex, 6));
-		gui.setEstimated_budgetTextField( 
-				tableModel.getValueAt(firstIndex, 7).toString());
+		if (tableModel.getValueAt(firstIndex, 7) != null)
+			gui.setEstimated_budgetTextField(  
+					tableModel.getValueAt(firstIndex, 7).toString());
+		else
+			gui.setEstimated_budgetTextField("");
+		
 		gui.setOutcomeTextField( (String) 
-					tableModel.getValueAt(firstIndex, 8).toString()); 
+				tableModel.getValueAt(firstIndex, 8)); 
 	}
 
 	public void tableChanged(TableModelEvent e)
@@ -66,8 +73,11 @@ public class ProjectInfoController implements ListSelectionListener,TableModelLi
 
 			// read the data in each column using getValueAt and display it on corresponding textfield
 
-			gui.setProject_IDTextField( (String) 
-					tableModel.getValueAt(firstIndex, 0));
+			if (tableModel.getValueAt(firstIndex, 0) != null)
+				gui.setProject_IDTextField(
+						tableModel.getValueAt(firstIndex, 0).toString());
+			else
+				gui.setProject_IDTextField("");
 			gui.setProject_nameTextField( (String) 
 					tableModel.getValueAt(firstIndex, 1));
 			gui.setProject_descriptionTextField( (String) 
@@ -80,8 +90,11 @@ public class ProjectInfoController implements ListSelectionListener,TableModelLi
 					tableModel.getValueAt(firstIndex, 5));
 			gui.setEndDateTextField( (String) 
 					tableModel.getValueAt(firstIndex, 6));
-			gui.setEstimated_budgetTextField( (String) 
-					tableModel.getValueAt(firstIndex, 7));
+			if (tableModel.getValueAt(firstIndex, 7) != null)
+				gui.setEstimated_budgetTextField(  
+						tableModel.getValueAt(firstIndex, 7).toString());
+			else
+				gui.setEstimated_budgetTextField("");
 			gui.setOutcomeTextField( (String) 
 					tableModel.getValueAt(firstIndex, 8)); 
 
@@ -92,7 +105,7 @@ public class ProjectInfoController implements ListSelectionListener,TableModelLi
 	}
 
 
-	public void addRow(String[] array) {
+	public void addRow(String[] array) {	
 		tableModel.addRow(array);
 	}
 	public void deleteRow(String[] array, int index) {

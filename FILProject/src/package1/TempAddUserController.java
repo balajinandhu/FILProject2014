@@ -41,5 +41,10 @@ public class TempAddUserController implements ListSelectionListener { //,TableMo
 	public void addMemberRow(String[] name, int selectedRow) {
 		TempAddMemberModel.addMemberRow(name, selectedRow);
 	}
+	
+	public void delMemberRow(String[] name, int selectedRow) {
+		TempAddMemberModel.delMemberRow(name, selectedRow);
+	}
+
 
 }

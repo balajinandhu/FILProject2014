@@ -13,7 +13,7 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 
 
-public class ProjectUserController {//implements TableModelListener {
+public class ProjectUserController implements TableModelListener {
 
 	private ProjectUserModel tableModel1;
 	private AdminHomePageGUI gui;
@@ -30,26 +30,30 @@ public class ProjectUserController {//implements TableModelListener {
 		return tableModel1;
 	}
 
-/*	public void tableChanged(TableModelEvent e)	{
+	public void tableChanged(TableModelEvent e)	{
 		try {
 			// get the index of the inserted row
 			firstIndex = 0;
 
 			// create a new table model with the new data
-			tableModel = new ProjectInfoModel(tableModel.getList(), 
-					tableModel.getEntityManager());
-			tableModel.addTableModelListener(this);
+			tableModel1 = new ProjectUserModel(tableModel1.getList(), 
+					tableModel1.getEntityManager());
+			tableModel1.addTableModelListener(this);
 			// update the JTable with the data
 			//   gui.updateTable();
 
-			/* read the data in each column using getValueAt and display it on corresponding text field 
+			/* read the data in each column using getValueAt and display it on corresponding text field */
 		} catch(Exception exp) {
 			exp.getMessage();
 			exp.printStackTrace();
 		}
-	} */
-	public void readProjectbyUser(String projectName) {
-		tableModel1.readProjectbyUser(projectName);
+	}
+	
+	public ProjectUser readProjectbyUser(String projectName) {
+		if (tableModel1.readProjectbyUser(projectName) == null) {
+			return null;
+		} else
+			return new ProjectUser();
 
 	}
 

@@ -21,7 +21,7 @@ public class TaskUserModel  extends AbstractTableModel {
 	private TaskUser table;// represents the entity courselist
 	// This field contains additional information about the results 
 	private TaskInfoService taskInfoService;
-	private int numcols, numrows; // number of rows and columns
+	private int numcols = 2, numrows; // number of rows and columns
 	public TaskUserModel() {
 		// TODO Auto-generated constructor stub
 		factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
@@ -97,8 +97,18 @@ public class TaskUserModel  extends AbstractTableModel {
 
 	public List<TaskUser> readTaskbyUser(String userName) {
 		taskUserResultList = taskInfoService.readTaskbyUser(userName);
-		numrows = taskUserResultList.size();
-		numcols = table.getNumberOfColumns();
+		if (taskUserResultList != null) {
+			numrows = taskUserResultList.size();
+			numcols = table.getNumberOfColumns();
+			fireTableDataChanged();
+			if (numrows == 0) {
+				return null;
+			}
+		} else {
+			numrows = 0;
+			fireTableDataChanged();
+		}
+		
 		return taskUserResultList;
 	}
 

@@ -21,7 +21,7 @@ public class ProjectUserModel  extends AbstractTableModel {
 	private ProjectUser table;// represents the entity courselist
 	// This field contains additional information about the results 
 	private ProjectUserService projectInfoService;
-	private int numcols, numrows; // number of rows and columns
+	private int numcols = 3, numrows; // number of rows and columns
 	public ProjectUserModel() {
 		// TODO Auto-generated constructor stub
 		factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
@@ -55,7 +55,7 @@ public class ProjectUserModel  extends AbstractTableModel {
 	public boolean isCellEditable(int rowIndex, int colIndex) {
 		return false;
 	}
-	
+
 	public Class<?> getColumnClass(int col) {
 		return getValueAt(0, col).getClass();
 	}
@@ -73,7 +73,7 @@ public class ProjectUserModel  extends AbstractTableModel {
 		//data[rowIndex][columnIndex] = (String) aValue;
 		try {
 			ProjectUser element =projectUserResultList.get(row);
-	//		element.setColumnData(col, aValue); 
+			//		element.setColumnData(col, aValue); 
 			fireTableCellUpdated(row, col);
 		} catch(Exception err) {
 			err.toString();
@@ -97,8 +97,15 @@ public class ProjectUserModel  extends AbstractTableModel {
 
 	public List<ProjectUser> readProjectbyUser(String projectName) {
 		projectUserResultList = projectInfoService.readProjectbyUser(projectName);
-		numrows = projectUserResultList.size();
-		numcols = table.getNumberOfColumns();
+		if (projectUserResultList != null) {
+			numrows = projectUserResultList.size();
+			numcols = table.getNumberOfColumns();
+			fireTableDataChanged();
+		} else {
+			numrows = 0;
+			fireTableDataChanged();
+		}
+		
 		return projectUserResultList;
 	}
 

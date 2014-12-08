@@ -102,11 +102,32 @@ public class TempAddProjectModel extends AbstractTableModel {
 		projectInfo = tempAddTeamService.createProject(TempAddTeamResultList.get(rowIndex), name);
 		userTransaction.commit();
 		// set the current row to rowIndex
-		TempAddTeamResultList.remove(rowIndex);
-		fireTableRowsDeleted(rowIndex, rowIndex);
-		numrows--;
-		
+		if (projectInfo != null) {
+			TempAddTeamResultList.remove(rowIndex);
+			fireTableRowsDeleted(rowIndex, rowIndex);
+			numrows--;
+		}
+
 		return projectInfo;
+
+	}
+	
+	public TempAddProject delTeamRow(int rowIndex, String[] name) {
+		//data[rowIndex][columnIndex] = (String) aValue;
+		// complete the code
+		TempAddProject tempProject;
+		EntityTransaction userTransaction = manager.getTransaction(); 
+		userTransaction.begin();
+		tempProject = tempAddTeamService.delProject(TempAddTeamResultList.get(rowIndex), name);
+		userTransaction.commit();
+		// set the current row to rowIndex
+		if (tempProject != null) {
+			TempAddTeamResultList.remove(rowIndex);
+			fireTableRowsDeleted(rowIndex, rowIndex);
+			numrows--;
+		}
+
+		return tempProject;
 
 	}
 }
